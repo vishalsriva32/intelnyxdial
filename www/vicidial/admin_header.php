@@ -1016,6 +1016,7 @@ echo "</script>\n";
 echo "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n";
 echo "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\" />\n";
 echo "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap\" />\n";
+echo "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css\" />\n";
 ?>
 <style type="text/css">
 /* ── IntelNyx Dial Admin — Clean SaaS Theme ── */
@@ -1263,134 +1264,56 @@ img[src="./vicidial_admin_web_logo_small.gif"],
 img[src="vicidial_admin_web_logo_small.gif"] {
   display: none !important;
 }
-</style>
 
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: #f1f1f1; }
-::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
-
-a { color: var(--accent) !important; text-decoration: none; }
-a:hover { color: var(--accent-hover) !important; text-decoration: underline; }
-
-font[face] { font-family: 'Inter', 'Segoe UI', Helvetica, sans-serif !important; }
-font[color="white"], font[color="WHITE"] { color: var(--text-primary) !important; }
-font[color="BLACK"], font[color="black"] { color: var(--text-primary) !important; }
-font[color="red"],   font[color="RED"]   { color: var(--danger) !important; }
-font[color="green"], font[color="GREEN"] { color: var(--success) !important; }
-font[color="blue"],  font[color="BLUE"]  { color: var(--info) !important; }
-
-/* ── Sidebar ── */
-table[bgcolor="#015B91"], table[bgcolor="#015b91"],
-td[bgcolor="#015B91"],    td[bgcolor="#015b91"] {
-  background: var(--bg-sidebar) !important;
-  border-right: 1px solid var(--border-light) !important;
-}
-td[bgcolor="#015B91"] a, td[bgcolor="#015b91"] a {
-  color: var(--text-secondary) !important;
-  font-size: 13px !important;
-  display: block;
-  padding: 5px 12px;
-  border-radius: 5px;
-  transition: background .15s, color .15s;
-}
-td[bgcolor="#015B91"] a:hover, td[bgcolor="#015b91"] a:hover {
-  background: var(--accent-soft) !important;
-  color: var(--accent) !important;
-  text-decoration: none !important;
+/* ═══════════════════════════════════════════
+   SIDEBAR ICONS (Font Awesome via ::before)
+   ═══════════════════════════════════════════ */
+td[bgcolor="#015B91"] a::before,
+td[bgcolor="#015b91"] a::before {
+  font-family: 'Font Awesome 6 Free' !important;
+  font-weight: 900;
+  font-size: 12px;
+  margin-right: 8px;
+  width: 16px;
+  display: inline-block;
+  text-align: center;
+  color: var(--text-muted);
 }
 
-/* ── Top bar ── */
-td[bgcolor="#003399"], td[bgcolor="#003366"],
-table[bgcolor="#003399"] {
-  background: #ffffff !important;
-  border-bottom: 1px solid var(--border-light) !important;
-  box-shadow: var(--shadow-sm) !important;
-}
+/* Users */
+td[bgcolor="#015B91"] a[href*="ADD=0"]::before,
+td[bgcolor="#015b91"] a[href*="ADD=0"]::before { content: "\f0c0"; }
+/* Campaigns */
+td[bgcolor="#015B91"] a[href*="ADD=10"]::before,
+td[bgcolor="#015b91"] a[href*="ADD=10"]::before { content: "\f0a1"; }
+/* Lists */
+td[bgcolor="#015B91"] a[href*="ADD=100"]::before,
+td[bgcolor="#015b91"] a[href*="ADD=100"]::before { content: "\f03a"; }
+/* Scripts */
+td[bgcolor="#015B91"] a[href*="ADD=1000000"]::before,
+td[bgcolor="#015b91"] a[href*="ADD=1000000"]::before { content: "\f15c"; }
+/* Filters */
+td[bgcolor="#015B91"] a[href*="ADD=10000000"]::before,
+td[bgcolor="#015b91"] a[href*="ADD=10000000"]::before { content: "\f0b0"; }
+/* Inbound */
+td[bgcolor="#015B91"] a[href*="ADD=1000"]::before,
+td[bgcolor="#015b91"] a[href*="ADD=1000"]::before { content: "\f2a0"; }
+/* User Groups */
+td[bgcolor="#015B91"] a[href*="ADD=100000"]::before,
+td[bgcolor="#015b91"] a[href*="ADD=100000"]::before { content: "\f5a0"; }
+/* Remote Agents */
+td[bgcolor="#015B91"] a[href*="ADD=200"]::before,
+td[bgcolor="#015b91"] a[href*="ADD=200"]::before { content: "\f108"; }
+/* Admin / System */
+td[bgcolor="#015B91"] a[href*="ADD=70"]::before,
+td[bgcolor="#015b91"] a[href*="ADD=70"]::before { content: "\f013"; }
+/* Reports */
+td[bgcolor="#015B91"] a[href*="reports"]::before,
+td[bgcolor="#015b91"] a[href*="reports"]::before { content: "\f080"; }
 
-/* ── Cell backgrounds ── */
-td[bgcolor="white"], td[bgcolor="WHITE"],
-td[bgcolor="#ffffff"], td[bgcolor="#FFFFFF"] { background: #ffffff !important; }
-td[bgcolor="#B6D3FC"], td[bgcolor="#b6d3fc"] { background: #eff6ff !important; }
-td[bgcolor="#CCCCCC"], td[bgcolor="#cccccc"],
-td[bgcolor="#AAAAAA"], td[bgcolor="#aaaaaa"],
-td[bgcolor="#C0C0C0"] { background: #f9fafb !important; }
-td[bgcolor="#C6D6EC"], td[bgcolor="#c6d6ec"] { background: #f0f4ff !important; }
-td[bgcolor="#EAEAEA"], td[bgcolor="#eaeaea"],
-td[bgcolor="#DDDDDD"], td[bgcolor="#dddddd"],
-td[bgcolor="#EFEFEF"], td[bgcolor="#F5F5F5"] { background: #f9fafb !important; }
-td[bgcolor="#FF9999"], td[bgcolor="#ff9999"] { background: #fef2f2 !important; }
-td[bgcolor="#99FF99"], td[bgcolor="#99ff99"] { background: #f0fdf4 !important; }
-td[bgcolor="#FFFF99"], td[bgcolor="#ffff99"] { background: #fefce8 !important; }
-table[bgcolor="white"], table[bgcolor="#ffffff"],
-table[bgcolor="#FFFFFF"] { background: #ffffff !important; }
-tr:nth-child(even) td { background: #fafafa !important; }
-
-/* ── Tables ── */
-th, td {
-  color: var(--text-primary) !important;
-  font-family: 'Inter', 'Segoe UI', Helvetica, sans-serif !important;
-  font-size: 13px !important;
-  border-color: var(--border-light) !important;
-}
-th {
-  background: #f9fafb !important;
-  color: var(--text-secondary) !important;
-  font-weight: 600 !important;
-  font-size: 11px !important;
-  text-transform: uppercase;
-  letter-spacing: .04em;
-}
-
-/* ── Inputs ── */
-input[type="text"], input[type="password"], textarea, select {
-  background: #ffffff !important;
-  border: 1.5px solid var(--border-mid) !important;
-  border-radius: 6px !important;
-  color: var(--text-primary) !important;
-  font-family: 'Inter', sans-serif !important;
-  font-size: 13px !important;
-  padding: 7px 10px !important;
-  transition: border-color .18s, box-shadow .18s;
-}
-input[type="text"]:focus, input[type="password"]:focus,
-textarea:focus, select:focus {
-  border-color: var(--accent) !important;
-  outline: none !important;
-  box-shadow: 0 0 0 3px rgba(91,33,182,.10) !important;
-}
-
-/* ── Buttons ── */
-input[type="submit"], input[type="button"], button {
-  background: var(--accent) !important;
-  color: #ffffff !important;
-  border: none !important;
-  border-radius: 6px !important;
-  font-family: 'Inter', sans-serif !important;
-  font-weight: 600 !important;
-  font-size: 13px !important;
-  padding: 8px 18px !important;
-  cursor: pointer !important;
-  transition: background .18s !important;
-  box-shadow: var(--shadow-sm) !important;
-}
-input[type="submit"]:hover, input[type="button"]:hover, button:hover {
-  background: var(--accent-hover) !important;
-}
-
-/* ── Logo ── */
-img[src="./vicidial_admin_web_logo.gif"],
-img[src="vicidial_admin_web_logo.gif"],
-img[src="./vicidial_admin_web_logo_small.gif"],
-img[src="vicidial_admin_web_logo_small.gif"] {
-  content: url('../agc/images/intelnyxdial-logo.svg') !important;
-  width: 140px !important;
-  height: auto !important;
-  max-height: 40px !important;
-  display: block !important;
-  margin: 14px auto 6px !important;
-  filter: none !important;
-}
+/* Active nav item icon color */
+td[bgcolor="#015B91"] a:hover::before,
+td[bgcolor="#015b91"] a:hover::before { color: var(--accent) !important; }
 </style>
 <?php
 echo "</head>\n";
