@@ -1,587 +1,738 @@
-/* @group resets and elements */
-* { margin: 0; padding: 0; }
+/* ============================================================
+   IntelNyx Dial — Custom Glassmorphism Theme
+   Deep Purple + Gold Premium Edition
+   Overrides style.css — safe to update after upgrades
+   ============================================================ */
 
-html { height: 101%; font-family: �Helvetica Neue�, Arial, Helvetica, sans-serif; background: #fff; }
-body { font-family: Helvetica, Arial, sans-serif; }
+/* ── Google Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-img { border: 0;}
+/* ══════════════════════════════════════════
+   1. CSS VARIABLES & THEME TOKENS
+   ══════════════════════════════════════════ */
+:root {
+  /* Brand */
+  --brand-purple-deep:  #0e0320;
+  --brand-purple-dark:  #1a0533;
+  --brand-purple-mid:   #2d1b69;
+  --brand-purple-light: #4c2f9e;
+  --brand-gold:         #f5c518;
+  --brand-gold-light:   #ffe066;
+  --brand-gold-dark:    #c89b0a;
 
-a { color: #3c86b7; text-decoration: none; }
-a:hover { cursor: pointer; }
+  /* Glass surfaces */
+  --glass-bg:           rgba(255, 255, 255, 0.07);
+  --glass-bg-hover:     rgba(255, 255, 255, 0.12);
+  --glass-bg-active:    rgba(245, 197, 24, 0.12);
+  --glass-border:       rgba(255, 255, 255, 0.15);
+  --glass-border-gold:  rgba(245, 197, 24, 0.4);
+  --glass-blur:         blur(18px);
+  --glass-blur-heavy:   blur(30px);
 
-ul { line-height: 120%; }
+  /* Text */
+  --text-primary:   #f0eaff;
+  --text-secondary: rgba(240, 234, 255, 0.65);
+  --text-muted:     rgba(240, 234, 255, 0.35);
+  --text-gold:      #f5c518;
 
-p { font-size: 1.2em; line-height: 1.4em; font-family: Arial, sans-serif; color: #333; margin-bottom: 15px; }
-h1 { font-family: Helvetica, Arial, Verdana, sans-serif; color: #757575; font-weight: bold; font-size: 1.7em; line-height: 2.0em; }
-h2 { font-family: Georgia, Tahoma, sans-serif;font-size: 1.4em; letter-spacing: -0.04em; line-height: 1.8em; }
-h3 { color: #115a9f; font-weight: normal; font-size: 1.3em; line-height: 1.6em;  }
-h4 { color: #727272; font-family: Arial, Tahoma, sans-serif; font-size: 1.1em; line-height: 1.3em; margin-bottom: 0px; }
+  /* Status colours */
+  --status-green:   #22d47a;
+  --status-red:     #ff5c5c;
+  --status-yellow:  #f5c518;
+  --status-blue:    #7b9eff;
+  --status-gray:    rgba(255,255,255,0.3);
 
-/* @group core */
-.wrapper { width: 850px; overflow: hidden; margin: 0 auto; background: none; }
+  /* Spacing & radii */
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  20px;
+  --radius-xl:  28px;
 
-#content { display: block; width: 820px; margin: 0 auto; padding: 10px; }
-
-#right { display: block; width: 560px; float: left; overflow: hidden; margin-left: 5px; }
-#left { display: block; width: 240px; float: left; overflow: hidden; }
-
-/* @group navigation */
-nav { width: auto; background: #eee; height: 60px; border-bottom: 1px solid #dadada; margin-bottom: 30px; }
-
-ul#n { width: 850px; margin: 0 auto; display: block; list-style: none; }
-ul#n li:first-child {float: left;}
-ul#n li { float: right;}
-/* ul#n li a { display: block; padding: 0 11px; color: #969696; font-size: 15px; font-weight: bold; text-shadow: 0px 1px 1px #fff; } */
-
-#userStats, #notifications { display: block; width: auto; background-color: #f9f9f9; border: 1px solid #ccc; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; padding: 12px; behavior: url(PIE.php);}
-#userStats {margin-bottom: 5px;}
-#notifications { height:20px; }
-
-#userStats .pic { height: 160px; widows: 160px; float: left; display: block; margin-right: 20px; text-align: center;}
-#userStats .pic img { padding: 7px; background: #fff; border: 1px solid #ccc; margin-bottom: 5px; }
-#livecall { font-size: 1.2em; font-weight: bold; text-transform: uppercase;}
-.on { color: green;}
-.off { color: #808080;}
-.dead { color: red;}
-
-#userStats .data { float: left; display: block; position:  relative; width: 600px; /*height: 166px;*/ padding: 4px; padding-left: 15px; background: #e6e6e6; overflow:  hidden; box-sizing: border-box; -moz-box-sizing: border-box; behavior: url(PIE.php);}
-#userStats .data h1 { color: #474747; line-height: 1.6em; text-shadow: 0px 1px 1px #fff; behavior: url(PIE.php);}
-#userStats .data h3 { color: #666; line-height: 0.9em; margin-bottom: 5px; }
-#userStats .data h4 { font-size: 1.2em; line-height: 1.3em; }
-
-#userStats .data .actionLinks { position: absolute; right: 6px; top: 8px; }
-#userStats .data .actionLinks a img { margin-right: 5px; }
-
-#userStats .data .sep { clear: both; margin-top: 0px; width: 590px; height: 1px; border-bottom: 1px solid #ccc; margin-bottom: 0; }
-#userStats .data ul.numbers { list-style: none; width: 590px; padding-top: 7px; margin-top: 0; border-top: 1px solid #fff; color: #474747; }
-#userStats .data ul.numbers li { width: 135px; float: left; display: block; padding-left: 8px; height: 50px; border-right: 1px dotted #909090; text-transform: uppercase; }
-#userStats .data ul.numbers li strong { color: #7b7b7b; display: block; font-size: 1.4em; line-height: .9em; font-weight: bold; }
-
-#notifications { margin-top: 10px; }
-
-/* @group left */
-#left .gcontent { display: block; margin-bottom: 10px; }
-#left .gcontent .head { background: #589fc6; border: 1px solid #3e82a7; padding-left: 8px; }
-#left .gcontent .head h1 { color: #fafcfd; font-weight: bold; font-size: 1.4em; }
-
-#left .gcontent .boxy { overflow: hidden; border-radius: 0px 0px 5px 5px; border: 1px solid #ccc; border-top: 0px; padding: 10px 8px; background: #f9f9f9; behavior: url(PIE.php);}
-#left .gcontent .boxy span.action { font-size: 1.0em; float: left; padding-bottom: 10px; width: 200px;} /**may need to set width to fix for IE to avoid wrapping text**/
-#left .gcontent .boxy span a img { vertical-align: middle;}
-#left .gcontent .boxy span a span { padding-left: 5px;}
-#left .gcontent .boxy span a { text-decoration: none;}
-
-#left .gcontent .boxy .friendslist { display: block; margin-bottom: 15px; }
-#left .gcontent .boxy .friend { border-top: 1px solid #ccc; float: left; height: 40px; padding: 5px 5px 5px 4px; width: 100px; }
-#left .gcontent .boxy .friend img { border: 1px solid #ccc; float: left; padding: 2px; background: #fff; margin-right: 4px; }
-#left .gcontent .boxy .friend .friendly { position: relative; top: 16px; font-size: 1.2em; }
-
-#right span.action { border: 1px solid #ccc; border-radius: 5px; display: inline-block; font-size: 1.0em; float: left; padding: 15px; height: 79px; width: 109px;
-margin: 10px; text-align: center; overflow: hidden; behavior: url(PIE.php);} /** height here causes mute button to be hidden **/
-
-#right span.action img {  }
-#right span.notice { float: left; display: inline-block; padding: 15px; }
-
-.promptBox {position:absolute;top:1px;width:825px;height:980px;overflow: scroll; border-radius: 5px 5px 5px 5px; border: 1px solid #ccc; padding: 10px 8px; background: #f9f9f9; behavior: url(PIE.php);}
-.promptBox .centerTable { margin-top: 35%; margin-left: 35%; }
-    
-/** @group clearfix **/
-.clearfix:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
-.clearfix { display: inline-block; }
- 
-html[xmlns] .clearfix { display: block; }
-* html .clearfix { height: 1%; }
-
-.nobrdr { border: 0px !important; }
-
-#x_logo{height: 64px;}
-#DiaLControl, #LogOffControl
-{
-    height: 50px;
-    /*width: 115px;*/
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
+  /* Shadows */
+  --shadow-card:  0 8px 32px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.06) inset;
+  --shadow-glow:  0 0 24px rgba(245,197,24,0.25);
+  --shadow-btn:   0 4px 14px rgba(0,0,0,0.4);
 }
 
-#LogOffControl
-{
-    margin-left: 1px\9;
+/* ══════════════════════════════════════════
+   2. BASE RESET & BODY
+   ══════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-#DiaLControl a, #LogOffControl a{
-    float: left;
-    height: 50px;
-    width:  60px;
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif !important;
+  font-size: 14px;
+  color: var(--text-primary);
+  /* Rich layered background */
+  background-color: var(--brand-purple-deep) !important;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 20% 10%,  rgba(76, 47, 158, 0.5) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 90%,  rgba(45, 27, 105, 0.6) 0%, transparent 55%),
+    radial-gradient(ellipse 100% 80% at 50% 50%, rgba(26, 5,  51,  0.9) 0%, transparent 100%),
+    linear-gradient(135deg, #0e0320 0%, #1a0533 50%, #0e0320 100%) !important;
+  background-attachment: fixed !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#DiaLControl a img, #LogOffControl a img{
-    height:  58px;
-    margin-bottom: -15px;
-    
+a { color: var(--brand-gold); text-decoration: none; }
+a:hover { color: var(--brand-gold-light); text-decoration: underline; }
+
+/* ══════════════════════════════════════════
+   3. SCROLLBARS (webkit)
+   ══════════════════════════════════════════ */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: rgba(255,255,255,0.04); border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: rgba(245,197,24,0.35); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(245,197,24,0.6); }
+
+/* ══════════════════════════════════════════
+   4. TYPOGRAPHY OVERRIDES
+   ══════════════════════════════════════════ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', 'Segoe UI', Helvetica, sans-serif !important;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+h1 { font-size: 1.6em; letter-spacing: -0.02em; }
+h2 { font-size: 1.3em; }
+h3 { font-size: 1.1em; color: var(--text-secondary); }
+h4 { font-size: 1.0em; color: var(--text-secondary); }
+
+.body_text, .body_small, .body_tiny, .sk_text, .sb_text, .skb_text {
+  font-family: 'Inter', 'Segoe UI', Helvetica, sans-serif !important;
+  color: var(--text-primary) !important;
 }
 
-#DiaLControl a span, #LogOffControl a span{
-    /* all rules below are specific to ie9 and below */
-    position: absolute\9;
-    margin-left: -55px\9; 
-    margin-top: 45px\9;
+.log_text  { font-size: 13px; font-family: 'Inter', monospace; color: var(--text-primary); }
+.log_title { font-size: 13px; font-weight: 600; color: var(--brand-gold); }
+
+/* ══════════════════════════════════════════
+   5. LOGIN BOX — GLASSMORPHISM
+   ══════════════════════════════════════════ */
+
+/* Override old .barStyle with glassmorphism */
+.barStyle,
+#loginBox {
+  background: rgba(255, 255, 255, 0.07) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-xl) !important;
+  box-shadow:
+    var(--shadow-card),
+    0 0 60px rgba(76, 47, 158, 0.3),
+    inset 0 1px 0 rgba(255,255,255,0.12) !important;
+  -webkit-box-shadow:
+    var(--shadow-card),
+    0 0 60px rgba(76, 47, 158, 0.3),
+    inset 0 1px 0 rgba(255,255,255,0.12) !important;
+  -moz-box-shadow:
+    var(--shadow-card),
+    0 0 60px rgba(76, 47, 158, 0.3),
+    inset 0 1px 0 rgba(255,255,255,0.12) !important;
+  background-image: none !important;
+  filter: none !important;
 }
 
-#ParkCounterSpan
-{
-    margin-left: 50px;
-    color: red;
-}
-#ParkCounterSpan2
-{
-    color: red;
-}
-#MainStatuSSpan
-{
-    float: left;
-}
-#MainPanelCustInfo input, #MainPanelCustInfo select, .input
-{
-    background: #f1f1f1;
-    padding: 2px 2px 2px 5px;
-    margin: 0 0 5px 0;
-    width: 170px;
-    border: 1px solid #ccc;
-    font-size: 12pt;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    -moz-box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
-    -webkit-box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
-    box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
-    behavior: url(PIE.php);
+#loginBox {
+  width: 440px !important;
+  height: auto !important;
+  min-height: 380px;
+  padding: 40px 36px 36px !important;
+  margin: -220px 0 0 -250px !important;
+  top: 48% !important;
+  left: 50% !important;
+  position: absolute !important;
 }
 
-#ScriptContents
-{
-    width: 540px;
+/* Remove dashed inner border pseudo-element */
+#loginBox:before { display: none !important; }
+
+/* Login heading */
+#loginBox h1 {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 1.5em !important;
+  font-weight: 600 !important;
+  color: var(--text-primary) !important;
+  text-align: center !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  margin: 16px 0 28px !important;
+  text-shadow: 0 0 20px rgba(245,197,24,0.3) !important;
 }
 
-/*---------------------------
- BEGIN styles for login box
- --------------------------*/
-.barStyle
-{
-    background-color: #fff;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
-    background-image: -webkit-linear-gradient(top, #fff, #eee);
-    background-image: -moz-linear-gradient(top, #fff, #eee);
-    background-image: -ms-linear-gradient(top, #fff, #eee);
-    background-image: -o-linear-gradient(top, #fff, #eee);
-    background-image: linear-gradient(top, #fff, #eee);
-    
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;  
-    -webkit-box-shadow:
-          0 0 2px rgba(0, 0, 0, 0.2),
-          0 1px 1px rgba(0, 0, 0, .2),
-          0 3px 0 #fff,
-          0 4px 0 rgba(0, 0, 0, .2),
-          0 6px 0 #fff,  
-          0 7px 0 rgba(0, 0, 0, .2);
-    -moz-box-shadow:
-          0 0 2px rgba(0, 0, 0, 0.2),  
-          1px 1px   0 rgba(0,   0,   0,   .1),
-          3px 3px   0 rgba(255, 255, 255, 1),
-          4px 4px   0 rgba(0,   0,   0,   .1),
-          6px 6px   0 rgba(255, 255, 255, 1),  
-          7px 7px   0 rgba(0,   0,   0,   .1);
-    box-shadow:
-          0 0 2px rgba(0, 0, 0, 0.2),  
-          0 1px 1px rgba(0, 0, 0, .2),
-          0 3px 0 #fff,
-          0 4px 0 rgba(0, 0, 0, .2),
-          0 6px 0 #fff,  
-          0 7px 0 rgba(0, 0, 0, .2);
-    behavior: url(PIE.php);
+/* Remove old decorative lines */
+#loginBox h1:before, #loginBox h1:after { display: none !important; }
+
+/* Logo */
+#loginBox img, #loginBox #x_logo {
+  display: block !important;
+  margin: 0 auto 6px !important;
+  max-width: 240px !important;
+  height: auto !important;
+  filter: drop-shadow(0 0 10px rgba(245,197,24,0.4)) !important;
 }
 
-#loginBox
-{
-    height: 375px;
-    width: 400px;
-    margin: -150px 0 0 -230px;
-    padding: 30px;
-    position: absolute;
-    top: 35%;
-    left: 50%;
-    z-index: 0;
+/* Inputs */
+#loginBox #inputs input,
+#loginBox #inputs #LogiNCamPaigns select {
+  background: rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: var(--radius-sm) !important;
+  color: var(--text-primary) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+  padding: 12px 14px !important;
+  width: 100% !important;
+  margin: 0 0 12px !important;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06) !important;
+  background-image: none !important;
 }
 
-#loginBox:before
-{
-    content: '';
-    position: absolute;
-    z-index: -1;
-    border: 1px dashed #ccc;
-    top: 5px;
-    bottom: 5px;
-    left: 5px;
-    right: 5px;
-    -moz-box-shadow: 0 0 0 1px #fff;
-    -webkit-box-shadow: 0 0 0 1px #fff;
-    box-shadow: 0 0 0 1px #fff;
-    behavior: url(PIE.php);
+#loginBox #inputs input:focus,
+#loginBox #inputs #LogiNCamPaigns select:focus {
+  background: rgba(255, 255, 255, 0.10) !important;
+  border-color: var(--glass-border-gold) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 0 0 3px rgba(245,197,24,0.15) !important;
+  outline: none !important;
 }
 
-/*--------------------*/
-
-#loginBox h1
-{
-    text-shadow: 0 1px 0 rgba(255, 255, 255, .7), 0px 2px 0 rgba(0, 0, 0, .5);
-    text-transform: uppercase;
-    text-align: center;
-    color: #666;
-    margin: 0 0 30px 0;
-    letter-spacing: 4px;
-    font: normal 26px/1 Verdana, Helvetica;
-    position: relative;
-    behavior: url(PIE.php);
+#loginBox #inputs #LogiNCamPaigns select {
+  height: 42px !important;
+  width: 100% !important;
+  margin-left: 0 !important;
+  padding: 8px 12px !important;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
-#loginBox h1:after, #loginBox h1:before
-{
-    background-color: #777;
-    content: "";
-    height: 1px;
-    position: absolute;
-    top: 15px;
-    width: 120px;   
+#loginBox #inputs #LogiNReseT {
+  float: none !important;
+  display: flex !important;
+  justify-content: flex-end;
+  margin: -6px 0 8px !important;
 }
 
-#loginBox h1:after
-{ 
-    background-image: -webkit-gradient(linear, left top, right top, from(#777), to(#fff));
-    background-image: -webkit-linear-gradient(left, #777, #fff);
-    background-image: -moz-linear-gradient(left, #777, #fff);
-    background-image: -ms-linear-gradient(left, #777, #fff);
-    background-image: -o-linear-gradient(left, #777, #fff);
-    background-image: linear-gradient(left, #777, #fff);      
-    right: 0;
-    behavior: url(PIE.php);
+#loginBox #instructions { color: var(--status-red) !important; font-size: 12px; }
+#loginBox #actions { margin: 8px 0 0 !important; }
+
+/* ══════════════════════════════════════════
+   6. BUTTONS — GLASSMORPHISM
+   ══════════════════════════════════════════ */
+
+.button,
+input[type="submit"],
+input[type="button"],
+button {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  letter-spacing: 0.03em;
+  border-radius: var(--radius-sm) !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  border: 1px solid rgba(255,255,255,0.2) !important;
+  text-shadow: none !important;
+  box-shadow: var(--shadow-btn) !important;
+  padding: 10px 22px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#loginBox h1:before
-{
-    background-image: -webkit-gradient(linear, right top, left top, from(#777), to(#fff));
-    background-image: -webkit-linear-gradient(right, #777, #fff);
-    background-image: -moz-linear-gradient(right, #777, #fff);
-    background-image: -ms-linear-gradient(right, #777, #fff);
-    background-image: -o-linear-gradient(right, #777, #fff);
-    background-image: linear-gradient(right, #777, #fff);
-    left: 0;
-    behavior: url(PIE.php);
+/* Primary gold button */
+.button.blue,
+#loginBox #submit {
+  background: linear-gradient(135deg, #f5c518 0%, #c89b0a 100%) !important;
+  color: #1a0533 !important;
+  border-color: rgba(245,197,24,0.5) !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 20px rgba(245,197,24,0.35), 0 2px 6px rgba(0,0,0,0.3) !important;
+  filter: none !important;
 }
 
-/*--------------------*/
-
-#loginBox #instructions
-{
-    color: red;
-}
-#loginBox fieldset, #TransferMain
-{
-    border: 0;
-    padding: 0;
-    margin: 0;
+.button.blue:hover, #loginBox #submit:hover {
+  background: linear-gradient(135deg, #ffe066 0%, #f5c518 100%) !important;
+  box-shadow: 0 6px 28px rgba(245,197,24,0.5), 0 2px 6px rgba(0,0,0,0.3) !important;
+  transform: translateY(-1px) !important;
 }
 
-/*--------------------*/
-
-#loginBox #inputs input, #loginBox #inputs #LogiNCamPaigns select, #TransferMain input, #TransferMain select
-{
-    background: #f1f1f1 url(http://www.red-team-design.com/wp-content/uploads/2011/09/login-sprite.png) no-repeat;
-    padding: 15px 15px 15px 30px;
-    margin: 0 0 10px 0;
-    width: 330px;
-    border: 1px solid #ccc;
-    font-size: 12pt;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    -moz-box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
-    -webkit-box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
-    box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
-    behavior: url(PIE.php);
+.button.blue:active, #loginBox #submit:active {
+  transform: translateY(0px) !important;
+  box-shadow: 0 2px 10px rgba(245,197,24,0.3) !important;
 }
 
-#loginBox #VD_login
-{
-    background-position: 5px -2px !important;
-}
-
-#loginBox #VD_pass
-{
-    background-position: 5px -52px !important;
-}
-
-#loginBox #phone_login
-{
-    background-position: 5px -52px !important;
-}
-
-#loginBox #inputs #LogiNReseT
-{
-    float:right;
-    cursor: pointer;
-    margin-right: 15px;
-}
-#loginBox #inputs #LogiNCamPaigns select
-{
-    background-position: 5px -302px !important;
-    height: 30px;
-    width: 333px;
-    margin-left: 10px;
-    margin-right: 0px;
-    padding: 4px;
-    float: left;
-}
-#loginBox #inputs #LogiNReseT select
-{
-    float: right;
-}
-#loginBox #inputs input:focus, #TransferMain input:focus
-{
-    background-color: #fff;
-    border-color: #e8c291;
-    outline: none;
-    -moz-box-shadow: 0 0 0 1px #e8c291 inset;
-    -webkit-box-shadow: 0 0 0 1px #e8c291 inset;
-    box-shadow: 0 0 0 1px #e8c291 inset;
-    behavior: url(PIE.php);
-}
-
-/*--------------------*/
-#loginBox #actions
-{
-    margin: 5px 0 0 0px;
-}
-
-#loginBox #submit
-{       
-    float: left;
-    height: 35px;
-    padding: 0;
-    width: 120px;
-    cursor: pointer;
-    margin-left: 11px;
-    /*font: bold 15px Arial, Helvetica;
-    color: #8f5a0a;*/
-}
-
-#loginBox #submit:focus
-{       
-    text-decoration: none;
-}   
-
-#loginBox #submit::-moz-focus-inner
-{
-  border: none;
-}
-
-#loginBox #footer
-{
-    margin-top: 40px;
-}
-/*---------------------------
- END styles for login box
- --------------------------*/
-
-
-/*---------------------------
- BEGIN generic button styles
- --------------------------*/
-.button
-{
-    text-decoration: none;
-    font: bold 1.2em 'Trebuchet MS',Arial, Helvetica; /*Change the em value to scale the button*/
-    display: inline-block;
-    text-align: center;
-    color: #fff;
-
-    border: 1px solid #9c9c9c; /* Fallback style */
-    border: 1px solid rgba(0, 0, 0, 0.3);            
-
-    moz-border-radius: .3em;
-    border-radius: .3em;
-
-    text-shadow: 0 1px 0 rgba(0,0,0,0.4);
-
-    box-shadow: 0 0 .05em rgba(0,0,0,0.4);
-    -moz-box-shadow: 0 0 .05em rgba(0,0,0,0.4);
-    -webkit-box-shadow: 0 0 .05em rgba(0,0,0,0.4);
-    behavior: url(PIE.php);
-}
-.button:hover
-{
-    box-shadow: 0 0 .1em rgba(0,0,0,0.4);
-    -moz-box-shadow: 0 0 .1em rgba(0,0,0,0.4);
-    -webkit-box-shadow: 0 0 .1em rgba(0,0,0,0.4);
-    behavior: url(PIE.php);
-}
-.button:active
-{
-    position: relative;
-    top: 1px;
-}
-.blue {
-    background: #4477a1;
-    background: -webkit-gradient(linear, left top, left bottom, from(#81a8cb), to(#4477a1) );
-    background: -moz-linear-gradient(-90deg, #81a8cb, #4477a1);
-    filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#81a8cb', endColorstr='#4477a1');
-    behavior: url(PIE.php);
-}
-.blue:hover {
-    background: #81a8cb;
-    background: -webkit-gradient(linear, left top, left bottom, from(#4477a1), to(#81a8cb) );
-    background: -moz-linear-gradient(-90deg, #4477a1, #81a8cb);
-    filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4477a1', endColorstr='#81a8cb');
-    behavior: url(PIE.php);
-}
 .blueinactive {
-    background: #4477a1;
-    background: -webkit-gradient(linear, left top, left bottom, from(#81a8cb), to(#4477a1) );
-    background: -moz-linear-gradient(-90deg, #81a8cb, #4477a1);
-    filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#81a8cb', endColorstr='#4477a1');
-    opacity: .25;
-    filter: alpha(opacity = 25);
-
-    behavior: url(PIE.php);
+  background: rgba(245,197,24,0.15) !important;
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  filter: none !important;
 }
-/*---------------------------
- END generic button styles
- --------------------------*/
 
-/*------------------------------------------------------------------------------------
- BEGIN styles for transfer conference options (some settings inherited from #loginBox)
- -------------------------------------------------------------------------------------*/
+/* Dial/logoff controls */
+#DiaLControl a, #LogOffControl a {
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-sm) !important;
+  backdrop-filter: blur(8px);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+#DiaLControl a:hover, #LogOffControl a:hover {
+  background: var(--glass-bg-active) !important;
+  box-shadow: 0 0 14px rgba(245,197,24,0.3) !important;
+}
+
+/* ══════════════════════════════════════════
+   7. MAIN AGENT LAYOUT
+   ══════════════════════════════════════════ */
+
+.wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: visible !important;
+  background: none !important;
+}
+
+#content {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 12px !important;
+}
+
+#userStats, #notifications {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-card) !important;
+  padding: 14px !important;
+  -moz-border-radius: var(--radius-md) !important;
+  -webkit-border-radius: var(--radius-md) !important;
+}
+
+#userStats { margin-bottom: 10px !important; }
+#notifications { height: auto !important; min-height: 28px; }
+
+#userStats .data {
+  background: rgba(255,255,255,0.04) !important;
+  color: var(--text-primary) !important;
+}
+#userStats .data h1  { color: var(--text-primary) !important;   text-shadow: none !important; }
+#userStats .data h3  { color: var(--text-secondary) !important; }
+#userStats .data h4  { color: var(--text-secondary) !important; }
+#userStats .data .sep { border-color: rgba(255,255,255,0.1) !important; }
+#userStats .data ul.numbers li { color: var(--text-primary) !important; border-right-color: rgba(255,255,255,0.1) !important; }
+#userStats .data ul.numbers li strong { color: var(--brand-gold) !important; }
+
+#livecall { color: var(--text-primary) !important; }
+.on   { color: var(--status-green)  !important; }
+.off  { color: var(--text-muted)    !important; }
+.dead { color: var(--status-red)    !important; }
+
+/* Sidebar */
+#left .gcontent .head {
+  background: linear-gradient(135deg, var(--brand-purple-mid), var(--brand-purple-light)) !important;
+  border: none !important;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0 !important;
+  padding: 10px 12px !important;
+}
+#left .gcontent .head h1 {
+  color: #fff !important;
+  font-size: 1.0em !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+}
+#left .gcontent .boxy {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-top: none !important;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm) !important;
+}
+#right span.action {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-sm) !important;
+  color: var(--text-primary) !important;
+  transition: background 0.2s, box-shadow 0.2s !important;
+}
+#right span.action:hover {
+  background: var(--glass-bg-hover) !important;
+  border-color: var(--glass-border-gold) !important;
+  box-shadow: 0 0 14px rgba(245,197,24,0.2) !important;
+}
+
+/* ══════════════════════════════════════════
+   8. CUSTOMER INFO FORM INPUTS
+   ══════════════════════════════════════════ */
+
+#MainPanelCustInfo input,
+#MainPanelCustInfo select,
+#MainPanelCustInfo textarea,
+.input {
+  background: rgba(255,255,255,0.07) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  border-radius: var(--radius-sm) !important;
+  color: var(--text-primary) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  padding: 7px 10px !important;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05) !important;
+  -moz-border-radius: var(--radius-sm) !important;
+  -webkit-border-radius: var(--radius-sm) !important;
+}
+
+#MainPanelCustInfo input:focus,
+#MainPanelCustInfo select:focus,
+#MainPanelCustInfo textarea:focus {
+  background: rgba(255,255,255,0.11) !important;
+  border-color: var(--glass-border-gold) !important;
+  box-shadow: 0 0 0 3px rgba(245,197,24,0.12) !important;
+  outline: none !important;
+}
+
+#MainPanelCustInfo label,
+.cust_form,
+.cust_form_text {
+  color: var(--text-secondary) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+}
+
+select option {
+  background: var(--brand-purple-dark);
+  color: var(--text-primary);
+}
+
+/* ══════════════════════════════════════════
+   9. STATUS BAR & CALL STATUS
+   ══════════════════════════════════════════ */
+
+#MainStatuSSpan {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 6px 12px !important;
+  color: var(--text-primary) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+}
+
+.sd_text { font-size: 15px !important; font-weight: 700 !important; color: var(--brand-gold) !important; }
+.sh_text { font-size: 13px !important; font-weight: 600 !important; color: var(--text-primary) !important; }
+.queue_text_red { color: var(--status-red) !important; font-weight: 600 !important; }
+.preview_text     { background: rgba(34,212,122,0.12) !important; color: var(--status-green) !important; border-radius: 4px; padding: 2px 6px; }
+.preview_text_red { background: rgba(255,92,92,0.12)  !important; color: var(--status-red)   !important; border-radius: 4px; padding: 2px 6px; }
+#ParkCounterSpan, #ParkCounterSpan2 { color: var(--status-red) !important; font-weight: 600; }
+
+/* ══════════════════════════════════════════
+   10. SCRIPT DISPLAY PANEL
+   ══════════════════════════════════════════ */
+
+#ScriptContents {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--text-primary) !important;
+  padding: 16px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+}
+
+/* ══════════════════════════════════════════
+   11. TRANSFER / CONFERENCE PANEL
+   ══════════════════════════════════════════ */
+
+#TransferMain {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-card) !important;
+  padding: 16px !important;
+}
 
 #TransferMain #x-transfer-options,
 #TransferMain #x-transfer-inactive,
 #TransferMain #x-transfer-active,
-#TransferMain #x-transfer-local
-{
-    display: inline-block;
-    text-align: left;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    border: 1px solid;
-    padding: 5px;
-    margin-bottom: 5px;
-    /*behavior: url(PIE.php);*/
+#TransferMain #x-transfer-local {
+  background: rgba(255,255,255,0.04) !important;
+  border-color: var(--glass-border) !important;
+  border-radius: var(--radius-sm) !important;
+  color: var(--text-primary) !important;
+}
+#TransferMain #x-transfer-active {
+  background: rgba(34,212,122,0.08) !important;
+  border-color: rgba(34,212,122,0.3) !important;
 }
 
-/* override PIE for transfer number field  for Ie9 & below */
-#TransferMain input, #TransferMain input:focus, #loginBox #inputs #LogiNCamPaigns select
-{
-    behavior: none\9 !important;
+#TransferMain input,
+#TransferMain select {
+  background: rgba(255,255,255,0.07) !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  border-radius: var(--radius-sm) !important;
+  color: var(--text-primary) !important;
+  font-family: 'Inter', sans-serif !important;
 }
-#TransferMain #x-transfer-options span,
-#TransferMain #x-transfer-inactive span,
-#TransferMain #x-transfer-active span,
-#TransferMain #x-transfer-local span
-{
-    float:left;
-    margin: 5px 25px 5px 36px;
-    width: 180px;
-    font: bold 1.0em !important;
-    padding: 5px;
-    vertical-align: top;
+#TransferMain input:focus, #TransferMain select:focus {
+  border-color: var(--glass-border-gold) !important;
+  outline: none !important;
 }
 
-#TransferMain #x-transfer-options span a,
-#TransferMain #x-transfer-inactive span a,
-#TransferMain #x-transfer-active span a,
-#TransferMain #x-transfer-local span a
-{
-    width: auto;
-    height: 20px !important;
-    color: #eee;
-    padding: 0px;
+/* ══════════════════════════════════════════
+   12. DISPOSITION SCREEN
+   ══════════════════════════════════════════ */
+
+.promptBox {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur-heavy) !important;
+  -webkit-backdrop-filter: var(--glass-blur-heavy) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-card), 0 0 40px rgba(76,47,158,0.4) !important;
+  color: var(--text-primary) !important;
 }
 
-#TransferMain #x-transfer-local #agentdirectlink
-{
-    color: #666;
+.ON_conf {
+  background: rgba(245,197,24,0.12) !important;
+  color: var(--text-primary) !important;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+.OFF_conf {
+  background: rgba(255,255,255,0.06) !important;
+  color: var(--text-secondary) !important;
+  border-radius: 4px;
+  padding: 2px 6px;
 }
 
-#TransferMain #dialoverride_checkbox
-{
-    height: 13px;    
+/* ══════════════════════════════════════════
+   13. TABLES
+   ══════════════════════════════════════════ */
+
+table { border-collapse: collapse; width: 100%; }
+
+tr:nth-child(even) td { background: rgba(255,255,255,0.03) !important; }
+
+td, th {
+  color: var(--text-primary) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  border-color: rgba(255,255,255,0.07) !important;
+  padding: 6px 10px;
 }
 
-#TransferMain input, #TransferMain select
-{
-    background: none;
-    padding: 5px 5px 5px 5px;
-    margin: 0 0 0 36px;
-    width: 200px;
-    height: 20px;
-    border: 1px solid #ccc;
-    font-size: 13pt;
+th {
+  background: rgba(76,47,158,0.3) !important;
+  color: var(--brand-gold) !important;
+  font-weight: 600 !important;
+  font-size: 11px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
-#TransferMain select, #TransferMain #XfeRGrouPLisT
-{
-    margin: 0 0 0 6px !important;
-    padding: 5px;
-    width: 200px;
+/* ══════════════════════════════════════════
+   14. NAV BAR
+   ══════════════════════════════════════════ */
+
+nav {
+  background: rgba(14,3,32,0.85) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid var(--glass-border) !important;
+  height: auto !important;
+  min-height: 58px;
 }
 
-#TransferMain input[type="checkbox"]
-{
-    margin: 0px;
-    width: 20px;
-    text-align: left;
+ul#n { width: 100% !important; padding: 0 16px; }
+ul#n li a {
+  color: var(--text-secondary) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 13px !important;
+  text-shadow: none !important;
+  padding: 8px 14px !important;
+  border-radius: var(--radius-sm);
+  transition: color 0.2s, background 0.2s;
+}
+ul#n li a:hover {
+  color: var(--brand-gold) !important;
+  background: rgba(245,197,24,0.08) !important;
 }
 
-#TransferMain select
-{
-    width: 285px;
-    height: 30px;
+/* ══════════════════════════════════════════
+   15. LOADING OVERLAY
+   ══════════════════════════════════════════ */
+
+#LoadingBox {
+  background: rgba(14,3,32,0.85) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-lg) !important;
+  color: var(--text-primary) !important;
+  padding: 30px !important;
 }
 
-#TransferMain img
-{
-    margin-bottom: 0px !important;
-    height: 15px !important;
+/* ══════════════════════════════════════════
+   16. TOAST NOTIFICATION SYSTEM
+   ══════════════════════════════════════════ */
+
+.intelnyxdial-toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
 }
 
-/*------------------------------------------------------------------------------------
- END styles for transfer conference options (some settings inherited from #loginBox)
- -------------------------------------------------------------------------------------*/
+.intelnyxdial-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 300px;
+  max-width: 380px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-card);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: var(--text-primary);
+  pointer-events: all;
+  animation: toastIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  position: relative;
+  overflow: hidden;
+}
+.intelnyxdial-toast::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  border-radius: 3px 0 0 3px;
+}
+.intelnyxdial-toast.toast-success { background: rgba(16,32,22,0.9); }
+.intelnyxdial-toast.toast-success::before { background: var(--status-green); }
+.intelnyxdial-toast.toast-error   { background: rgba(34,10,10,0.9); }
+.intelnyxdial-toast.toast-error::before   { background: var(--status-red); }
+.intelnyxdial-toast.toast-warning { background: rgba(34,28,8,0.9); }
+.intelnyxdial-toast.toast-warning::before { background: var(--status-yellow); }
+.intelnyxdial-toast.toast-info    { background: rgba(14,3,32,0.9); }
+.intelnyxdial-toast.toast-info::before    { background: var(--status-blue); }
 
-#LoadingBox
-{
-    display: none;
+.intelnyxdial-toast .toast-icon  { font-size: 18px; line-height: 1; flex-shrink: 0; }
+.intelnyxdial-toast .toast-body  { flex: 1; line-height: 1.45; }
+.intelnyxdial-toast .toast-title { font-weight: 600; margin-bottom: 2px; }
+.intelnyxdial-toast .toast-msg   { color: var(--text-secondary); font-size: 12px; }
+
+.intelnyxdial-toast .toast-close {
+  background: none; border: none; cursor: pointer;
+  color: var(--text-muted); font-size: 16px;
+  padding: 0; line-height: 1; flex-shrink: 0;
+  transition: color 0.15s;
+}
+.intelnyxdial-toast .toast-close:hover { color: var(--text-primary); }
+.intelnyxdial-toast.toast-out { animation: toastOut 0.25s ease forwards; }
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(100%) scale(0.9); }
+  to   { opacity: 1; transform: translateX(0)   scale(1);   }
+}
+@keyframes toastOut {
+  from { opacity: 1; transform: translateX(0)    scale(1);   max-height: 120px; }
+  to   { opacity: 0; transform: translateX(100%) scale(0.9); max-height: 0; }
 }
 
-.log_text {
-    font-size: 14pt;
-}
+/* ══════════════════════════════════════════
+   17. MISC OVERRIDES — OLD INLINE STYLES
+   ══════════════════════════════════════════ */
 
-.log_text_sm
-{
-    font-size: 10pt;
+/* Kill white/grey table cell backgrounds */
+td[bgcolor="#eaeaea"], td[bgcolor="#EAEAEA"],
+td[bgcolor="white"],  td[bgcolor="#FFFFFF"], td[bgcolor="#ffffff"] {
+  background: rgba(255,255,255,0.04) !important;
 }
-
-.log_title
-{
-    font-size: 12pt;
+td[bgcolor="#cccccc"], td[bgcolor="#CCCCCC"] {
+  background: rgba(255,255,255,0.06) !important;
 }
 
 .disabled_img {
-    /* filter: url(filters.svg#grayscale);  Firefox 3.5+ */
-    filter: gray; /* IE5+ */
-    /* -webkit-filter: grayscale(1); /* Webkit Nightlies & Google Chrome Canary */
+  filter: grayscale(100%) brightness(0.4) !important;
+  opacity: 0.5;
+}
+
+#x_logo {
+  filter: drop-shadow(0 0 8px rgba(245,197,24,0.35));
+  height: 52px !important;
+}
+
+div.scroll_list {
+  background: rgba(255,255,255,0.04) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-sm) !important;
+}
+
+.body_small_bold { font-weight: 600 !important; color: var(--text-primary) !important; }
+
+/* Let layout fill the browser window */
+body > table, body > form > table {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* ══════════════════════════════════════════
+   18. FOOTER BRANDING
+   ══════════════════════════════════════════ */
+
+#footer, .footer-brand {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 11px;
+  padding: 10px 0 6px;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.04em;
+}
+
+/* ══════════════════════════════════════════
+   19. RESPONSIVE
+   ══════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  #loginBox {
+    width: 92vw !important;
+    margin: -48% 0 0 -46vw !important;
+    padding: 28px 20px !important;
+  }
+  .wrapper, #content { width: 100% !important; }
+}
+
+@media (min-width: 1200px) {
+  #loginBox { width: 480px !important; margin: -230px 0 0 -260px !important; }
 }

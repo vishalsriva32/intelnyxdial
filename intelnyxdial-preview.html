@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>IntelNyx Dial — UI Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+<style>
+/* ─── RESET ─────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ─── TOKENS ─────────────────────────────── */
+:root {
+  --pp-deep:   #0e0320;
+  --pp-dark:   #1a0533;
+  --pp-mid:    #2d1b69;
+  --pp-light:  #4c2f9e;
+  --gold:      #f5c518;
+  --gold-lt:   #ffe066;
+  --gold-dk:   #c89b0a;
+  --glass:     rgba(255,255,255,0.07);
+  --glass-hov: rgba(255,255,255,0.12);
+  --glass-act: rgba(245,197,24,0.12);
+  --border:    rgba(255,255,255,0.13);
+  --border-g:  rgba(245,197,24,0.4);
+  --txt:       #f0eaff;
+  --txt-2:     rgba(240,234,255,0.65);
+  --txt-3:     rgba(240,234,255,0.35);
+  --green:     #22d47a;
+  --red:       #ff5c5c;
+  --blue:      #7b9eff;
+  --r-sm: 8px; --r-md: 14px; --r-lg: 20px; --r-xl: 28px;
+  --shadow: 0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+/* ─── BASE ─────────────────────────────── */
+html, body {
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  background: var(--pp-deep);
+  color: var(--txt);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* animated background */
+body {
+  background-image:
+    radial-gradient(ellipse 80% 55% at 18% 12%, rgba(76,47,158,0.55) 0%, transparent 58%),
+    radial-gradient(ellipse 60% 48% at 82% 88%, rgba(45,27,105,0.65) 0%, transparent 52%),
+    radial-gradient(ellipse 100% 80% at 50% 50%, rgba(26,5,51,0.9) 0%, transparent 100%),
+    linear-gradient(135deg, #0e0320 0%, #1a0533 50%, #0e0320 100%);
+  background-attachment: fixed;
+}
+
+a { color: var(--gold); text-decoration: none; }
+a:hover { color: var(--gold-lt); }
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: rgba(255,255,255,0.03); }
+::-webkit-scrollbar-thumb { background: rgba(245,197,24,0.3); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(245,197,24,0.55); }
+
+/* ─── TOP NAV (preview switcher) ────────── */
+.preview-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(10,2,26,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; height: 54px; padding: 0 24px; gap: 20px;
+}
+.preview-brand {
+  font-size: 17px; font-weight: 700; color: var(--txt); flex-shrink: 0;
+}
+.preview-brand span { color: var(--gold); }
+.preview-brand small { font-weight: 300; font-size: 12px; color: var(--txt-3); margin-left: 4px; }
+
+.nav-tabs { display: flex; gap: 4px; margin: 0 auto; }
+.nav-tab {
+  padding: 7px 18px; font-size: 13px; font-weight: 500;
+  color: var(--txt-2); border-radius: var(--r-sm);
+  cursor: pointer; border: 1px solid transparent;
+  transition: all 0.18s;
+}
+.nav-tab:hover { background: var(--glass); color: var(--txt); }
+.nav-tab.active {
+  background: var(--glass-act);
+  border-color: var(--border-g);
+  color: var(--gold);
+}
+
+.preview-badge {
+  font-size: 11px; color: var(--txt-3); border: 1px solid var(--border);
+  padding: 4px 10px; border-radius: 20px; flex-shrink: 0;
+}
+
+/* ─── SCREEN WRAPPER ────────────────────── */
+.screen { display: none; padding-top: 54px; min-height: 100vh; }
+.screen.active { display: block; }
+
+/* ═══════════════════════════════════════════
+   SCREEN 1 — LOGIN
+══════════════════════════════════════════ */
+#s-login {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding-top: 54px;
+}
+#s-login.active { display: flex; }
+
+.login-wrap {
+  background: var(--glass);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 44px 40px 38px;
+  width: 420px;
+  box-shadow: var(--shadow), 0 0 70px rgba(76,47,158,0.3);
+  position: relative;
+}
+/* top shimmer line */
+.login-wrap::before {
+  content: '';
+  position: absolute; top: 0; left: 14%; right: 14%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(245,197,24,0.45), transparent);
+  border-radius: 1px;
+}
+
+.login-logo { text-align: center; margin-bottom: 6px; }
+.logo-mark {
+  font-size: 30px; font-weight: 700; letter-spacing: -0.5px;
+}
+.logo-mark .w { color: var(--txt); }
+.logo-mark .g { color: var(--gold); }
+.logo-mark .d { color: var(--txt-3); font-weight: 300; font-size: 19px; margin-left: 2px; }
+.logo-tagline {
+  font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(245,197,24,0.6); margin-bottom: 26px; text-align: center;
+}
+
+.login-heading {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--txt-2);
+  text-align: center; margin-bottom: 22px;
+}
+
+.field-group { margin-bottom: 12px; }
+.field-group label {
+  display: block; font-size: 11px; font-weight: 500;
+  color: var(--txt-3); margin-bottom: 5px; letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.field-group input,
+.field-group select {
+  width: 100%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: var(--r-sm);
+  color: var(--txt);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  padding: 11px 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  -webkit-appearance: none; appearance: none;
+}
+.field-group input::placeholder { color: var(--txt-3); }
+.field-group input:focus,
+.field-group select:focus {
+  background: rgba(255,255,255,0.09);
+  border-color: var(--border-g);
+  box-shadow: 0 0 0 3px rgba(245,197,24,0.12);
+}
+.field-group select { cursor: pointer; }
+.field-group select option { background: #1a0533; color: var(--txt); }
+
+.btn-login {
+  width: 100%; margin-top: 8px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dk) 100%);
+  color: #1a0533; font-family: 'Inter', sans-serif;
+  font-weight: 700; font-size: 15px;
+  border: none; border-radius: var(--r-sm);
+  padding: 13px; cursor: pointer;
+  box-shadow: 0 4px 22px rgba(245,197,24,0.38);
+  transition: all 0.2s; letter-spacing: 0.03em;
+}
+.btn-login:hover {
+  background: linear-gradient(135deg, var(--gold-lt) 0%, var(--gold) 100%);
+  box-shadow: 0 6px 30px rgba(245,197,24,0.55);
+  transform: translateY(-1px);
+}
+.btn-login:active { transform: translateY(0); }
+
+.login-footer {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 18px; padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.login-footer a { font-size: 12px; color: rgba(245,197,24,0.6); }
+.login-footer a:hover { color: var(--gold); }
+.login-ver { font-size: 10px; color: var(--txt-3); }
+
+/* toast in login */
+.toast-tray {
+  position: fixed; top: 70px; right: 20px;
+  display: flex; flex-direction: column; gap: 10px;
+  z-index: 2000; pointer-events: none;
+}
+.toast {
+  display: flex; align-items: flex-start; gap: 12px;
+  min-width: 300px; max-width: 360px;
+  padding: 14px 16px;
+  border-radius: var(--r-md);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  font-size: 13px; color: var(--txt);
+  pointer-events: all;
+  animation: toastSlide 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  position: relative; overflow: hidden;
+}
+.toast::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; border-radius: 3px 0 0 3px;
+}
+.t-success { background: rgba(14,28,20,0.9); border-color: rgba(34,212,122,0.2); }
+.t-success::before { background: var(--green); }
+.t-error   { background: rgba(30,8,8,0.9);   border-color: rgba(255,92,92,0.2); }
+.t-error::before   { background: var(--red); }
+.t-warning { background: rgba(30,26,6,0.9);  border-color: rgba(245,197,24,0.2); }
+.t-warning::before { background: var(--gold); }
+.t-info    { background: rgba(10,6,24,0.9);  border-color: rgba(123,158,255,0.2); }
+.t-info::before    { background: var(--blue); }
+.toast-icon { font-size: 17px; flex-shrink: 0; margin-top: 1px; line-height: 1; }
+.toast-body { flex: 1; }
+.toast-title { font-weight: 600; font-size: 13px; margin-bottom: 2px; }
+.toast-msg   { font-size: 11.5px; color: var(--txt-2); }
+@keyframes toastSlide {
+  from { opacity: 0; transform: translateX(110%) scale(0.9); }
+  to   { opacity: 1; transform: translateX(0)   scale(1); }
+}
+
+/* ═══════════════════════════════════════════
+   SCREEN 2 — AGENT CONSOLE
+══════════════════════════════════════════ */
+#s-agent { flex-direction: column; min-height: 100vh; }
+#s-agent.active { display: flex; }
+
+.agent-topbar {
+  position: fixed; top: 54px; left: 0; right: 0; z-index: 900;
+  background: rgba(10,2,26,0.88);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; height: 52px; padding: 0 20px; gap: 14px;
+}
+.agent-logo { font-size: 16px; font-weight: 700; color: var(--txt); }
+.agent-logo span { color: var(--gold); }
+
+.agent-navlinks { display: flex; gap: 2px; }
+.agent-navlink {
+  font-size: 12px; color: var(--txt-2); padding: 6px 12px;
+  border-radius: var(--r-sm); cursor: pointer; transition: all 0.15s;
+}
+.agent-navlink:hover { background: var(--glass); color: var(--txt); }
+.agent-navlink.on { background: var(--glass-act); color: var(--gold); }
+
+.agent-statusbar {
+  margin-left: auto; display: flex; align-items: center; gap: 12px;
+}
+.pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--green);
+  box-shadow: 0 0 0 0 rgba(34,212,122,0.5);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(34,212,122,0.5); }
+  70%  { box-shadow: 0 0 0 8px rgba(34,212,122,0); }
+  100% { box-shadow: 0 0 0 0 rgba(34,212,122,0); }
+}
+.status-pill {
+  font-size: 11px; font-weight: 600;
+  padding: 4px 10px; border-radius: 20px;
+}
+.sp-green { background: rgba(34,212,122,0.15); color: var(--green); border: 1px solid rgba(34,212,122,0.3); }
+.sp-yellow { background: rgba(245,197,24,0.15); color: var(--gold); border: 1px solid rgba(245,197,24,0.3); }
+.sp-red { background: rgba(255,92,92,0.15); color: var(--red); border: 1px solid rgba(255,92,92,0.3); }
+.agent-timer { font-family: 'Courier New', monospace; font-size: 15px; font-weight: 700; color: var(--gold); letter-spacing: 1px; }
+
+/* main layout */
+.agent-layout {
+  display: flex; flex: 1;
+  padding-top: 106px; /* 54 preview nav + 52 agent topbar */
+  min-height: 100vh;
+}
+
+.agent-sidebar {
+  width: 210px; flex-shrink: 0;
+  border-right: 1px solid var(--border);
+  padding: 14px 12px;
+  display: flex; flex-direction: column; gap: 12px;
+  background: rgba(14,3,32,0.5);
+}
+
+.side-panel {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.side-panel-head {
+  background: linear-gradient(135deg, var(--pp-mid), var(--pp-light));
+  padding: 9px 12px;
+  font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.9);
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.side-panel-body { padding: 12px; }
+.side-row {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 8px; font-size: 12px;
+}
+.side-row:last-child { margin-bottom: 0; }
+.side-lbl { color: var(--txt-2); }
+.side-val { font-weight: 600; color: var(--gold); }
+
+.agent-main { flex: 1; padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; }
+
+/* call status header */
+.call-status-bar {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 12px 18px;
+  display: flex; align-items: center; gap: 14px;
+}
+.cs-label { font-size: 12px; color: var(--txt-2); }
+.cs-campaign { font-size: 12px; font-weight: 600; color: var(--txt); }
+.cs-sep { color: var(--txt-3); }
+.cs-time { font-family: monospace; font-size: 16px; font-weight: 700; color: var(--gold); margin-left: auto; }
+
+/* customer info */
+.cust-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 16px 18px;
+}
+.cust-header { margin-bottom: 14px; }
+.cust-name { font-size: 20px; font-weight: 700; color: var(--txt); }
+.cust-meta { font-size: 12px; color: var(--txt-2); margin-top: 3px; }
+
+.fields-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px 18px; }
+.field { }
+.f-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--txt-3); margin-bottom: 4px; }
+.f-val   { font-size: 13px; color: var(--txt); font-weight: 500; }
+.f-input {
+  width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 6px; color: var(--txt); font-size: 13px; padding: 7px 10px;
+  font-family: inherit; outline: none; transition: border-color 0.2s;
+}
+.f-input:focus { border-color: var(--border-g); box-shadow: 0 0 0 2px rgba(245,197,24,0.1); }
+
+/* call controls */
+.controls-row { display: flex; gap: 10px; }
+.ctrl {
+  flex: 1; background: var(--glass); border: 1px solid var(--border);
+  border-radius: var(--r-sm); padding: 10px 8px;
+  text-align: center; cursor: pointer; transition: all 0.18s;
+}
+.ctrl:hover { background: var(--glass-hov); border-color: rgba(255,255,255,0.2); }
+.ctrl.c-dial   { background: rgba(34,212,122,0.1); border-color: rgba(34,212,122,0.25); }
+.ctrl.c-hangup { background: rgba(255,92,92,0.1);  border-color: rgba(255,92,92,0.25); }
+.ctrl.c-hold   { background: rgba(245,197,24,0.08); border-color: rgba(245,197,24,0.2); }
+.ctrl.c-dial:hover   { background: rgba(34,212,122,0.18); }
+.ctrl.c-hangup:hover { background: rgba(255,92,92,0.18); }
+.ctrl-icon { font-size: 20px; margin-bottom: 4px; display: block; line-height: 1; }
+.ctrl-lbl  { font-size: 10px; color: var(--txt-2); font-weight: 500; }
+
+/* dispo */
+.dispo-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+}
+.dispo-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 10px; }
+.dispo-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 7px; }
+.dispo-btn {
+  padding: 8px 4px; text-align: center; border-radius: 7px; font-size: 11px;
+  font-weight: 600; cursor: pointer; border: 1px solid; transition: all 0.15s;
+}
+.dispo-btn:hover { filter: brightness(1.15); transform: translateY(-1px); }
+.d-sale    { background: rgba(34,212,122,0.12); color: var(--green); border-color: rgba(34,212,122,0.3); }
+.d-noans   { background: var(--glass); color: var(--txt-2); border-color: var(--border); }
+.d-cb      { background: rgba(123,158,255,0.1); color: var(--blue); border-color: rgba(123,158,255,0.25); }
+.d-busy    { background: var(--glass); color: var(--txt-2); border-color: var(--border); }
+.d-dnc     { background: rgba(255,92,92,0.1);  color: var(--red);  border-color: rgba(255,92,92,0.25); }
+.d-ni      { background: var(--glass); color: var(--txt-2); border-color: var(--border); }
+
+/* right panel */
+.agent-right { width: 280px; flex-shrink: 0; padding: 16px 14px 16px 0; display: flex; flex-direction: column; gap: 12px; }
+.script-card {
+  background: var(--glass); border: 1px solid var(--border); border-radius: var(--r-md);
+  padding: 14px 16px; flex: 1;
+}
+.script-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 10px; }
+.script-body { font-size: 12.5px; color: var(--txt-2); line-height: 1.7; }
+.script-var { color: var(--gold); font-weight: 600; }
+.xfer-card {
+  background: var(--glass); border: 1px solid var(--border); border-radius: var(--r-md); padding: 14px 16px;
+}
+
+/* ═══════════════════════════════════════════
+   SCREEN 3 — ADMIN PANEL
+══════════════════════════════════════════ */
+#s-admin { min-height: 100vh; }
+#s-admin.active { display: flex; }
+
+.admin-layout { display: flex; flex: 1; padding-top: 54px; min-height: 100vh; }
+
+.admin-sidebar {
+  width: 210px; flex-shrink: 0;
+  background: linear-gradient(180deg, #2d1b69 0%, #1a0533 100%);
+  border-right: 1px solid rgba(245,197,24,0.15);
+  display: flex; flex-direction: column;
+  position: fixed; top: 54px; bottom: 0; left: 0; z-index: 800;
+  overflow-y: auto;
+}
+.admin-logo-area {
+  padding: 18px 18px 14px; border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.admin-logotype { font-size: 18px; font-weight: 700; color: var(--txt); }
+.admin-logotype span { color: var(--gold); }
+.admin-subtitle { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245,197,24,0.6); margin-top: 2px; }
+
+.admin-user-area {
+  padding: 12px 18px 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  font-size: 11.5px; color: var(--txt-2);
+}
+.admin-user-area strong { color: var(--gold); font-weight: 600; }
+
+.nav-group-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(245,197,24,0.5);
+  padding: 14px 18px 5px;
+}
+.admin-nav-item {
+  display: flex; align-items: center; gap: 9px;
+  padding: 9px 18px; font-size: 12.5px; color: rgba(240,234,255,0.6);
+  cursor: pointer; transition: all 0.15s; border-left: 2px solid transparent;
+}
+.admin-nav-item svg { width: 15px; height: 15px; opacity: 0.7; flex-shrink: 0; }
+.admin-nav-item:hover { background: rgba(245,197,24,0.06); color: var(--txt); }
+.admin-nav-item.active { background: rgba(245,197,24,0.1); color: var(--gold); border-left-color: var(--gold); }
+
+.admin-logout {
+  margin-top: auto; padding: 14px 18px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 12px; color: var(--txt-3); cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+}
+.admin-logout:hover { color: var(--red); }
+
+/* content area */
+.admin-content {
+  flex: 1; margin-left: 210px; padding: 28px 28px; overflow-y: auto;
+}
+
+.page-header { margin-bottom: 22px; }
+.page-title { font-size: 22px; font-weight: 700; color: var(--txt); margin-bottom: 4px; }
+.page-desc  { font-size: 13px; color: var(--txt-2); }
+
+.kpi-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 20px; }
+.kpi-card {
+  background: var(--glass); border: 1px solid var(--border); border-radius: var(--r-md);
+  padding: 14px 16px;
+}
+.kpi-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--txt-3); margin-bottom: 6px; }
+.kpi-number { font-size: 26px; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 4px; }
+.kpi-change { font-size: 11px; }
+.kpi-up { color: var(--green); } .kpi-dn { color: var(--red); }
+
+.data-card {
+  background: var(--glass); border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; margin-bottom: 16px;
+}
+.data-card-head {
+  padding: 12px 18px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.data-card-title { font-size: 13px; font-weight: 600; color: var(--txt); }
+.data-card-action {
+  font-size: 12px; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dk) 100%);
+  color: #1a0533; font-weight: 700; border: none; border-radius: 6px;
+  padding: 6px 14px; cursor: pointer; font-family: inherit;
+}
+
+.admin-table { width: 100%; border-collapse: collapse; }
+.admin-table th {
+  background: rgba(76,47,158,0.3); color: var(--gold);
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+  padding: 10px 16px; text-align: left; border-bottom: 1px solid var(--border);
+}
+.admin-table td {
+  padding: 11px 16px; font-size: 12.5px; color: var(--txt);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.admin-table tr:last-child td { border-bottom: none; }
+.admin-table tr:hover td { background: rgba(255,255,255,0.025); }
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 600; padding: 3px 9px; border-radius: 20px; }
+.b-green  { background: rgba(34,212,122,0.12); color: var(--green); border: 1px solid rgba(34,212,122,0.25); }
+.b-yellow { background: rgba(245,197,24,0.12); color: var(--gold);  border: 1px solid rgba(245,197,24,0.25); }
+.b-red    { background: rgba(255,92,92,0.12);  color: var(--red);   border: 1px solid rgba(255,92,92,0.25); }
+.b-blue   { background: rgba(123,158,255,0.12);color: var(--blue);  border: 1px solid rgba(123,158,255,0.25); }
+
+.action-link { font-size: 12px; color: var(--gold); cursor: pointer; margin-right: 10px; }
+.action-link:hover { color: var(--gold-lt); text-decoration: underline; }
+
+/* form grid in admin */
+.form-section { background: var(--glass); border: 1px solid var(--border); border-radius: var(--r-md); padding: 20px 22px; margin-bottom: 16px; }
+.form-section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 16px; }
+.form-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px 20px; margin-bottom: 14px; }
+.form-field label { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--txt-3); margin-bottom: 5px; }
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 6px; color: var(--txt); font-family: 'Inter', sans-serif; font-size: 13px;
+  padding: 8px 11px; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none;
+}
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--border-g);
+  box-shadow: 0 0 0 3px rgba(245,197,24,0.1);
+}
+.form-field select option { background: #1a0533; color: var(--txt); }
+.form-actions { display: flex; gap: 10px; margin-top: 8px; }
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dk) 100%);
+  color: #1a0533; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px;
+  border: none; border-radius: 7px; padding: 10px 24px; cursor: pointer;
+  box-shadow: 0 4px 16px rgba(245,197,24,0.3); transition: all 0.2s;
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(245,197,24,0.45); }
+.btn-secondary {
+  background: var(--glass); color: var(--txt-2); font-family: 'Inter', sans-serif;
+  font-weight: 500; font-size: 13px; border: 1px solid var(--border);
+  border-radius: 7px; padding: 10px 22px; cursor: pointer; transition: background 0.18s;
+}
+.btn-secondary:hover { background: var(--glass-hov); color: var(--txt); }
+</style>
+</head>
+<body>
+
+<!-- ── PREVIEW NAV ───────────────────────────────── -->
+<nav class="preview-nav">
+  <div class="preview-brand">intel<span>nyx</span> dial <small>preview</small></div>
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="showScreen('login',this)">Login Page</div>
+    <div class="nav-tab" onclick="showScreen('agent',this)">Agent Console</div>
+    <div class="nav-tab" onclick="showScreen('admin',this)">Admin Panel</div>
+  </div>
+  <div class="preview-badge">UI Preview · No backend required</div>
+</nav>
+
+<!-- ── TOAST TRAY ─────────────────────────────────── -->
+<div class="toast-tray" id="toasts"></div>
+
+<!-- ════════════════════════════════════════════════
+     SCREEN 1 — LOGIN
+═════════════════════════════════════════════════ -->
+<div id="s-login" class="screen active">
+  <div class="login-wrap">
+    <div class="login-logo">
+      <div class="logo-mark">
+        <span class="w">intel</span><span class="g">nyx</span><span class="d">dial</span>
+      </div>
+      <div class="logo-tagline">Intelligent Contact Platform</div>
+    </div>
+    <div class="login-heading">Agent Sign In</div>
+
+    <div class="field-group">
+      <label>User ID</label>
+      <input type="text" value="agent01" placeholder="Enter your user ID" />
+    </div>
+    <div class="field-group">
+      <label>Password</label>
+      <input type="password" value="••••••••" placeholder="Enter password" />
+    </div>
+    <div class="field-group">
+      <label>Extension</label>
+      <input type="text" value="1001" placeholder="Phone extension" />
+    </div>
+    <div class="field-group">
+      <label>Campaign</label>
+      <select>
+        <option>OUTBOUND_SALES</option>
+        <option>INBOUND_SUPPORT</option>
+        <option>CLOSER_TEAM</option>
+        <option>WINBACK_Q4</option>
+      </select>
+    </div>
+
+    <button class="btn-login" onclick="loginClick()">Log In</button>
+
+    <div class="login-footer">
+      <a href="#">Forgot password?</a>
+      <a href="#" onclick="showScreen('admin', document.querySelectorAll('.nav-tab')[2]);return false;">Admin Panel →</a>
+      <span class="login-ver">v2.14-intelnyxdial</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SCREEN 2 — AGENT CONSOLE
+═════════════════════════════════════════════════ -->
+<div id="s-agent" class="screen">
+  <!-- sticky top bar -->
+  <div class="agent-topbar">
+    <span class="agent-logo">intel<span>nyx</span> dial</span>
+    <div class="agent-navlinks">
+      <span class="agent-navlink on" onclick="agentTabClick(this)">Dialer</span>
+      <span class="agent-navlink" onclick="agentTabClick(this)">Script</span>
+      <span class="agent-navlink" onclick="agentTabClick(this)">Callbacks (2)</span>
+      <span class="agent-navlink" onclick="agentTabClick(this)">Timeclock</span>
+    </div>
+    <div class="agent-statusbar">
+      <div class="pulse"></div>
+      <span class="status-pill sp-green">LIVE CALL</span>
+      <span class="agent-timer" id="call-timer">04:17</span>
+      <span class="status-pill sp-yellow" style="cursor:pointer" onclick="showToast('Pausing dialer…','warning','Pause')">⏸ Pause</span>
+      <span class="status-pill sp-red" style="cursor:pointer;margin-left:4px" onclick="showScreen('login',document.querySelectorAll(\'.nav-tab\')[0])">⏻ Logout</span>
+    </div>
+  </div>
+
+  <div class="agent-layout">
+    <!-- sidebar -->
+    <div class="agent-sidebar">
+      <div class="side-panel">
+        <div class="side-panel-head">Session Stats</div>
+        <div class="side-panel-body">
+          <div class="side-row"><span class="side-lbl">Calls Today</span><span class="side-val">47</span></div>
+          <div class="side-row"><span class="side-lbl">Talk Time</span><span class="side-val">3h 22m</span></div>
+          <div class="side-row"><span class="side-lbl">Sales</span><span class="side-val">9</span></div>
+          <div class="side-row"><span class="side-lbl">Ratio</span><span class="side-val">19.1%</span></div>
+          <div class="side-row"><span class="side-lbl">Status</span><span class="badge b-green">Active</span></div>
+        </div>
+      </div>
+
+      <div class="side-panel">
+        <div class="side-panel-head">Queue</div>
+        <div class="side-panel-body">
+          <div class="side-row"><span class="side-lbl">Waiting</span><span class="side-val">3</span></div>
+          <div class="side-row"><span class="side-lbl">Longest</span><span class="side-val" id="q-wait">1:42</span></div>
+          <div class="side-row"><span class="side-lbl">Agents</span><span class="side-val">18</span></div>
+          <div class="side-row"><span class="side-lbl">Campaign</span><span class="badge b-yellow">SALES</span></div>
+        </div>
+      </div>
+
+      <div class="side-panel">
+        <div class="side-panel-head">Quick Dial</div>
+        <div class="side-panel-body" style="display:flex;flex-direction:column;gap:6px">
+          <div style="background:rgba(34,212,122,.1);border:1px solid rgba(34,212,122,.25);border-radius:6px;padding:8px 10px;cursor:pointer;font-size:12px;color:var(--green);font-weight:600;text-align:center" onclick="showToast('Dialing next lead…','success','Auto Dial')">▶ Dial Next Number</div>
+          <div style="background:rgba(245,197,24,.08);border:1px solid rgba(245,197,24,.2);border-radius:6px;padding:8px 10px;cursor:pointer;font-size:12px;color:var(--gold);font-weight:600;text-align:center" onclick="showToast('Call transferred','info','Transfer')">⇄ Blind Transfer</div>
+          <div style="background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:6px;padding:8px 10px;cursor:pointer;font-size:12px;color:var(--txt-2);text-align:center" onclick="showToast('Recording started','info','Record')">⏺ Start Recording</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- main content -->
+    <div class="agent-main">
+      <!-- call status bar -->
+      <div class="call-status-bar">
+        <div class="pulse"></div>
+        <span class="cs-label">Live Call</span>
+        <span class="cs-sep">·</span>
+        <span class="cs-campaign">OUTBOUND_SALES</span>
+        <span class="cs-sep" style="margin-left:auto">Connected</span>
+        <span class="cs-time" id="timer2">04:17</span>
+      </div>
+
+      <!-- customer info card -->
+      <div class="cust-card">
+        <div class="cust-header">
+          <div class="cust-name">Michael Torres</div>
+          <div class="cust-meta">Lead #483921 &nbsp;·&nbsp; Florida, US &nbsp;·&nbsp; Last contact: 3 days ago &nbsp;·&nbsp; <span style="color:var(--gold)">2 previous calls</span></div>
+        </div>
+        <div class="fields-grid">
+          <div class="field">
+            <div class="f-label">Phone</div>
+            <input class="f-input" value="+1 (305) 555-0184" />
+          </div>
+          <div class="field">
+            <div class="f-label">Alt Phone</div>
+            <input class="f-input" value="+1 (786) 555-0021" />
+          </div>
+          <div class="field">
+            <div class="f-label">Email</div>
+            <input class="f-input" value="m.torres@mail.com" />
+          </div>
+          <div class="field">
+            <div class="f-label">First Name</div>
+            <input class="f-input" value="Michael" />
+          </div>
+          <div class="field">
+            <div class="f-label">Last Name</div>
+            <input class="f-input" value="Torres" />
+          </div>
+          <div class="field">
+            <div class="f-label">State</div>
+            <input class="f-input" value="FL" />
+          </div>
+          <div class="field">
+            <div class="f-label">Postal Code</div>
+            <input class="f-input" value="33101" />
+          </div>
+          <div class="field">
+            <div class="f-label">Vendor Code</div>
+            <input class="f-input" value="VD-9921-FL" />
+          </div>
+          <div class="field">
+            <div class="f-label">Gender</div>
+            <select class="f-input"><option>M</option><option>F</option><option>U</option></select>
+          </div>
+        </div>
+      </div>
+
+      <!-- controls -->
+      <div class="controls-row">
+        <div class="ctrl c-dial" onclick="showToast('Dialing next lead…','success','Dial Next')">
+          <span class="ctrl-icon">📞</span><span class="ctrl-lbl">Dial Next</span>
+        </div>
+        <div class="ctrl c-hangup" onclick="showToast('Call ended','error','Hangup')">
+          <span class="ctrl-icon">📵</span><span class="ctrl-lbl">Hangup</span>
+        </div>
+        <div class="ctrl c-hold" onclick="showToast('Customer on hold','warning','Hold')">
+          <span class="ctrl-icon">⏸</span><span class="ctrl-lbl">Hold</span>
+        </div>
+        <div class="ctrl" onclick="showToast('Transfer panel opened','info','Transfer')">
+          <span class="ctrl-icon">🔀</span><span class="ctrl-lbl">Transfer</span>
+        </div>
+        <div class="ctrl" onclick="showToast('Recording started','info','Record')">
+          <span class="ctrl-icon">⏺</span><span class="ctrl-lbl">Record</span>
+        </div>
+        <div class="ctrl" onclick="showToast('Web form opened','info','Web Form')">
+          <span class="ctrl-icon">🌐</span><span class="ctrl-lbl">Web Form</span>
+        </div>
+        <div class="ctrl" onclick="showToast('Added to DNC list','error','DNC')">
+          <span class="ctrl-icon">🚫</span><span class="ctrl-lbl">Add DNC</span>
+        </div>
+        <div class="ctrl" onclick="showToast('Muted','warning','Mute')">
+          <span class="ctrl-icon">🔇</span><span class="ctrl-lbl">Mute</span>
+        </div>
+      </div>
+
+      <!-- dispo -->
+      <div class="dispo-card">
+        <div class="dispo-title">Disposition — select after call ends</div>
+        <div class="dispo-grid">
+          <div class="dispo-btn d-sale"  onclick="showToast('Disposed: SALE','success','Disposition')">SALE</div>
+          <div class="dispo-btn d-noans" onclick="showToast('Disposed: NO ANSWER','warning','Disposition')">NO ANS</div>
+          <div class="dispo-btn d-cb"    onclick="showToast('Callback scheduled','info','Disposition')">CALLBK</div>
+          <div class="dispo-btn d-busy"  onclick="showToast('Disposed: BUSY','warning','Disposition')">BUSY</div>
+          <div class="dispo-btn d-dnc"   onclick="showToast('Added to DNC','error','Disposition')">DNC</div>
+          <div class="dispo-btn d-ni"    onclick="showToast('Disposed: NOT INTERESTED','warning','Disposition')">N/I</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- right panel (script) -->
+    <div class="agent-right">
+      <div class="script-card">
+        <div class="script-title">Call Script</div>
+        <div class="script-body">
+          Hi, may I speak with <span class="script-var">Michael</span>?<br><br>
+          Hi <span class="script-var">Michael</span>, this is [Your Name] calling from IntelNyx Solutions.<br><br>
+          How are you doing today in <span class="script-var">Florida</span>?<br><br>
+          I'm reaching out because you recently expressed interest in our product. I wanted to take just 2 minutes to share what's available in your area.<br><br>
+          <span style="color:var(--txt-3);font-style:italic;font-size:11px">[Pause — let customer respond]</span><br><br>
+          Based on your <span class="script-var">FL</span> location, we have some exclusive offers available through <span class="script-var">OUTBOUND_SALES</span>…
+        </div>
+      </div>
+      <div class="xfer-card">
+        <div class="dispo-title" style="margin-bottom:10px">Transfer / Conference</div>
+        <input style="width:100%;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:6px;color:var(--txt);padding:8px 10px;font-size:13px;margin-bottom:8px;outline:none;font-family:inherit" placeholder="Enter phone number…" />
+        <select style="width:100%;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:6px;color:var(--txt);padding:8px 10px;font-size:13px;margin-bottom:8px;outline:none;font-family:inherit;-webkit-appearance:none">
+          <option>— Select In-Group —</option>
+          <option>CLOSER_TEAM</option>
+          <option>MANAGER_LINE</option>
+          <option>RETENTION</option>
+        </select>
+        <div style="display:flex;gap:8px">
+          <div class="ctrl c-dial" style="flex:1;padding:9px 6px" onclick="showToast('Transfer initiated','info','Transfer')">
+            <span class="ctrl-lbl" style="font-size:12px;font-weight:600;color:var(--green)">Blind Xfer</span>
+          </div>
+          <div class="ctrl" style="flex:1;padding:9px 6px" onclick="showToast('3-way call started','info','3-Way')">
+            <span class="ctrl-lbl" style="font-size:12px;font-weight:600;color:var(--txt)">3-Way</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SCREEN 3 — ADMIN PANEL
+═════════════════════════════════════════════════ -->
+<div id="s-admin" class="screen">
+  <div class="admin-layout">
+    <!-- fixed sidebar -->
+    <div class="admin-sidebar">
+      <div class="admin-logo-area">
+        <div class="admin-logotype">intel<span>nyx</span> dial</div>
+        <div class="admin-subtitle">Administration</div>
+      </div>
+      <div class="admin-user-area">
+        Logged in as <strong>superadmin</strong>
+      </div>
+
+      <div class="nav-group-label">Manage</div>
+      <div class="admin-nav-item" onclick="adminTabClick(this,'users-view')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Users
+      </div>
+      <div class="admin-nav-item active" onclick="adminTabClick(this,'campaigns-view')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        Campaigns
+      </div>
+      <div class="admin-nav-item" onclick="adminTabClick(this,'lists-view')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        Lists
+      </div>
+      <div class="admin-nav-item" onclick="adminTabClick(this,'inbound-view')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 4.18 2 2 0 014.98 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Inbound Groups
+      </div>
+      <div class="admin-nav-item" onclick="adminTabClick(this,'phones-view')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        Phones
+      </div>
+
+      <div class="nav-group-label">Content</div>
+      <div class="admin-nav-item" onclick="adminTabClick(this,'scripts-view')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Scripts
+      </div>
+      <div class="admin-nav-item" onclick="adminTabClick(this,'filters-view')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        Filters
+      </div>
+
+      <div class="nav-group-label">System</div>
+      <div class="admin-nav-item" onclick="adminTabClick(this,'reports-view')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Reports
+      </div>
+      <div class="admin-nav-item" onclick="adminTabClick(this,'settings-view')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        Admin Settings
+      </div>
+      <div class="admin-logout" onclick="showScreen('login',document.querySelectorAll('.nav-tab')[0])">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Logout
+      </div>
+    </div>
+
+    <!-- content -->
+    <div class="admin-content">
+      <!-- CAMPAIGNS VIEW -->
+      <div id="campaigns-view">
+        <div class="page-header">
+          <div class="page-title">Campaigns</div>
+          <div class="page-desc">Manage outbound and inbound campaigns across all servers</div>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi-card"><div class="kpi-label">Active Campaigns</div><div class="kpi-number">12</div><div class="kpi-change kpi-up">↑ 2 this week</div></div>
+          <div class="kpi-card"><div class="kpi-label">Agents Online</div><div class="kpi-number">47</div><div class="kpi-change kpi-up">↑ 8 vs yesterday</div></div>
+          <div class="kpi-card"><div class="kpi-label">Calls Today</div><div class="kpi-number">1,842</div><div class="kpi-change kpi-up">↑ 12%</div></div>
+          <div class="kpi-card"><div class="kpi-label">Leads in Hopper</div><div class="kpi-number">3,204</div><div class="kpi-change kpi-dn">↓ 420 today</div></div>
+        </div>
+        <div class="data-card">
+          <div class="data-card-head">
+            <span class="data-card-title">All Campaigns</span>
+            <button class="data-card-action" onclick="showToast('Add Campaign form opened','info','New Campaign')">+ Add Campaign</button>
+          </div>
+          <table class="admin-table">
+            <thead><tr><th>Campaign ID</th><th>Name</th><th>Dial Method</th><th>Active Agents</th><th>Leads</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody>
+              <tr><td>OUTBOUND_SALES</td><td>Outbound Sales</td><td>RATIO</td><td>18</td><td>12,440</td><td><span class="badge b-green">Active</span></td><td><span class="action-link" onclick="showToast('Editing OUTBOUND_SALES','info','Edit')">Edit</span><span class="action-link">Pause</span></td></tr>
+              <tr><td>CLOSER_TEAM</td><td>Closer Team</td><td>INBOUND_MAN</td><td>9</td><td>—</td><td><span class="badge b-green">Active</span></td><td><span class="action-link" onclick="showToast('Editing CLOSER_TEAM','info','Edit')">Edit</span><span class="action-link">Pause</span></td></tr>
+              <tr><td>WINBACK_Q4</td><td>Win-Back Q4</td><td>PREVIEW</td><td>6</td><td>4,201</td><td><span class="badge b-yellow">Paused</span></td><td><span class="action-link" onclick="showToast('Editing WINBACK_Q4','info','Edit')">Edit</span><span class="action-link" style="color:var(--green)" onclick="showToast('Campaign resumed','success','Resume')">Resume</span></td></tr>
+              <tr><td>SURVEYS_OCT</td><td>October Surveys</td><td>RATIO</td><td>14</td><td>8,832</td><td><span class="badge b-green">Active</span></td><td><span class="action-link" onclick="showToast('Editing SURVEYS_OCT','info','Edit')">Edit</span><span class="action-link">Pause</span></td></tr>
+              <tr><td>DNC_SCRUB</td><td>DNC Scrub Run</td><td>—</td><td>0</td><td>—</td><td><span class="badge b-red">Stopped</span></td><td><span class="action-link" onclick="showToast('Editing DNC_SCRUB','info','Edit')">Edit</span><span class="action-link" style="color:var(--green)">Activate</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- USERS VIEW -->
+      <div id="users-view" style="display:none">
+        <div class="page-header">
+          <div class="page-title">Users</div>
+          <div class="page-desc">Manage agent and admin accounts</div>
+        </div>
+        <div class="data-card">
+          <div class="data-card-head">
+            <span class="data-card-title">All Users</span>
+            <button class="data-card-action" onclick="showToast('Add User form opened','info','New User')">+ Add User</button>
+          </div>
+          <table class="admin-table">
+            <thead><tr><th>User ID</th><th>Full Name</th><th>User Level</th><th>Campaign</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody>
+              <tr><td>agent01</td><td>Sarah Johnson</td><td>1 — Agent</td><td>OUTBOUND_SALES</td><td><span class="badge b-green">Active</span></td><td><span class="action-link">Edit</span><span class="action-link">Reset PW</span></td></tr>
+              <tr><td>agent02</td><td>Carlos Rivera</td><td>1 — Agent</td><td>OUTBOUND_SALES</td><td><span class="badge b-green">Active</span></td><td><span class="action-link">Edit</span><span class="action-link">Reset PW</span></td></tr>
+              <tr><td>closer01</td><td>Amy Chen</td><td>2 — Closer</td><td>CLOSER_TEAM</td><td><span class="badge b-green">Active</span></td><td><span class="action-link">Edit</span><span class="action-link">Reset PW</span></td></tr>
+              <tr><td>mgr01</td><td>David Kim</td><td>7 — Manager</td><td>ALL</td><td><span class="badge b-blue">Admin</span></td><td><span class="action-link">Edit</span><span class="action-link">Reset PW</span></td></tr>
+              <tr><td>superadmin</td><td>System Admin</td><td>9 — Admin</td><td>ALL</td><td><span class="badge b-blue">Super Admin</span></td><td><span class="action-link">Edit</span><span class="action-link">Reset PW</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- LISTS VIEW -->
+      <div id="lists-view" style="display:none">
+        <div class="page-header">
+          <div class="page-title">Lists</div>
+          <div class="page-desc">Lead lists assigned to campaigns</div>
+        </div>
+        <div class="data-card">
+          <div class="data-card-head">
+            <span class="data-card-title">All Lists</span>
+            <button class="data-card-action">+ Add List</button>
+          </div>
+          <table class="admin-table">
+            <thead><tr><th>List ID</th><th>List Name</th><th>Campaign</th><th>Total Leads</th><th>Remaining</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>101</td><td>Florida Leads Oct</td><td>OUTBOUND_SALES</td><td>12,440</td><td>4,821</td><td><span class="badge b-green">Active</span></td></tr>
+              <tr><td>102</td><td>Winback Database</td><td>WINBACK_Q4</td><td>4,201</td><td>4,201</td><td><span class="badge b-yellow">Paused</span></td></tr>
+              <tr><td>103</td><td>Survey Panel Nov</td><td>SURVEYS_OCT</td><td>8,832</td><td>6,109</td><td><span class="badge b-green">Active</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PLACEHOLDER VIEWS -->
+      <div id="inbound-view"  style="display:none"><div class="page-header"><div class="page-title">Inbound Groups</div><div class="page-desc">Configure inbound call routing</div></div><div class="form-section"><div class="form-section-title">Sample In-Group Settings</div><div class="form-row"><div class="form-field"><label>Group ID</label><input value="INBOUND_SUPPORT" /></div><div class="form-field"><label>Group Name</label><input value="Inbound Support" /></div><div class="form-field"><label>Group Type</label><select><option>CLOSER</option><option>INBOUND</option></select></div></div><div class="form-row"><div class="form-field"><label>Dial Timeout</label><input value="30" /></div><div class="form-field"><label>No Agent Action</label><select><option>VOICEMAIL</option><option>HANGUP</option><option>QUEUE</option></select></div><div class="form-field"><label>Status</label><select><option>Y</option><option>N</option></select></div></div><div class="form-actions"><button class="btn-primary" onclick="showToast('Settings saved','success','Save')">Save Settings</button><button class="btn-secondary">Cancel</button></div></div></div>
+      <div id="phones-view"   style="display:none"><div class="page-header"><div class="page-title">Phones</div><div class="page-desc">SIP extensions and phone logins</div></div><div class="data-card"><div class="data-card-head"><span class="data-card-title">Phone Extensions</span><button class="data-card-action">+ Add Phone</button></div><table class="admin-table"><thead><tr><th>Login</th><th>Extension</th><th>Server IP</th><th>Protocol</th><th>Status</th></tr></thead><tbody><tr><td>1001</td><td>1001</td><td>192.168.1.10</td><td>SIP</td><td><span class="badge b-green">Active</span></td></tr><tr><td>1002</td><td>1002</td><td>192.168.1.10</td><td>SIP</td><td><span class="badge b-green">Active</span></td></tr><tr><td>1003</td><td>1003</td><td>192.168.1.11</td><td>SIP</td><td><span class="badge b-yellow">Inactive</span></td></tr></tbody></table></div></div>
+      <div id="scripts-view"  style="display:none"><div class="page-header"><div class="page-title">Scripts</div><div class="page-desc">Call scripts with dynamic variable insertion</div></div><div class="form-section"><div class="form-section-title">Edit Script</div><div class="form-row"><div class="form-field"><label>Script ID</label><input value="SALES_PITCH_01" /></div><div class="form-field"><label>Script Name</label><input value="Sales Pitch v1" /></div><div class="form-field"><label>Campaign</label><select><option>OUTBOUND_SALES</option><option>WINBACK_Q4</option></select></div></div><div class="form-field" style="margin-bottom:12px"><label>Script Body</label><textarea rows="6" style="resize:vertical">Hi, may I speak with --A--first_name--B--?\n\nHi --A--first_name--B--, this is [Agent] calling from IntelNyx Solutions. How are you today in --A--state--B--?\n\nI'm reaching out because you recently expressed interest in our services...</textarea></div><div class="form-actions"><button class="btn-primary" onclick="showToast('Script saved','success','Save')">Save Script</button><button class="btn-secondary">Cancel</button></div></div></div>
+      <div id="filters-view"  style="display:none"><div class="page-header"><div class="page-title">Filters</div><div class="page-desc">Lead filter rules and hopper controls</div></div></div>
+      <div id="reports-view"  style="display:none"><div class="page-header"><div class="page-title">Reports</div><div class="page-desc">Agent performance, call logs, and campaign stats</div></div><div class="kpi-row"><div class="kpi-card"><div class="kpi-label">Total Calls (MTD)</div><div class="kpi-number">28,401</div><div class="kpi-change kpi-up">↑ 8%</div></div><div class="kpi-card"><div class="kpi-label">Sales (MTD)</div><div class="kpi-number">1,204</div><div class="kpi-change kpi-up">↑ 15%</div></div><div class="kpi-card"><div class="kpi-label">Conversion Rate</div><div class="kpi-number">4.2%</div><div class="kpi-change kpi-up">↑ 0.4pp</div></div><div class="kpi-card"><div class="kpi-label">Avg Handle Time</div><div class="kpi-number">4m 18s</div><div class="kpi-change kpi-dn">↑ 12s</div></div></div></div>
+      <div id="settings-view" style="display:none"><div class="page-header"><div class="page-title">Admin Settings</div><div class="page-desc">System-wide configuration</div></div><div class="form-section"><div class="form-section-title">System Settings</div><div class="form-row"><div class="form-field"><label>Company Name</label><input value="IntelNyx Solutions" /></div><div class="form-field"><label>Default Timezone</label><select><option>America/New_York</option><option>America/Chicago</option><option>America/Los_Angeles</option></select></div><div class="form-field"><label>Max Rings</label><input value="4" /></div></div><div class="form-actions"><button class="btn-primary" onclick="showToast('Settings saved','success','Admin Settings')">Save Settings</button></div></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── screen switching ── */
+function showScreen(id, tabEl) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('s-' + id).classList.add('active');
+  if (tabEl) tabEl.classList.add('active');
+}
+
+/* ── agent nav tabs ── */
+function agentTabClick(el) {
+  document.querySelectorAll('.agent-navlink').forEach(t => t.classList.remove('on'));
+  el.classList.add('on');
+}
+
+/* ── admin content tabs ── */
+function adminTabClick(navEl, viewId) {
+  document.querySelectorAll('.admin-nav-item').forEach(i => i.classList.remove('active'));
+  navEl.classList.add('active');
+  document.querySelectorAll('.admin-content > div').forEach(v => v.style.display = 'none');
+  var v = document.getElementById(viewId);
+  if (v) v.style.display = '';
+}
+
+/* ── login button ── */
+function loginClick() {
+  showToast('Authenticating agent…', 'info', 'Login');
+  setTimeout(function() {
+    showScreen('agent', document.querySelectorAll('.nav-tab')[1]);
+    showToast('Welcome back, agent01', 'success', 'Logged in');
+  }, 900);
+}
+
+/* ── toast system ── */
+var toastCount = 0;
+function showToast(title, type, label) {
+  type = type || 'info';
+  var icons = { success: '✓', error: '✕', warning: '⚠', info: 'ℹ' };
+  var colors = { success: 'var(--green)', error: 'var(--red)', warning: 'var(--gold)', info: 'var(--blue)' };
+  var tray = document.getElementById('toasts');
+  var el = document.createElement('div');
+  el.className = 'toast t-' + type;
+  el.innerHTML =
+    '<span class="toast-icon" style="color:' + (colors[type]||'var(--blue)') + '">' + (icons[type]||'ℹ') + '</span>' +
+    '<div class="toast-body"><div class="toast-title">' + label + '</div><div class="toast-msg">' + title + '</div></div>';
+  tray.appendChild(el);
+  var id = ++toastCount;
+  setTimeout(function() {
+    el.style.transition = 'opacity 0.3s, transform 0.3s';
+    el.style.opacity = '0';
+    el.style.transform = 'translateX(110%)';
+    setTimeout(function() { if (el.parentNode) el.parentNode.removeChild(el); }, 320);
+  }, 3500);
+}
+
+/* ── call timer ── */
+var sec = 257;
+setInterval(function() {
+  sec++;
+  var m = Math.floor(sec / 60), s = sec % 60;
+  var str = (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
+  var t1 = document.getElementById('call-timer');
+  var t2 = document.getElementById('timer2');
+  if (t1) t1.textContent = str;
+  if (t2) t2.textContent = str;
+}, 1000);
+
+/* welcome toast on load */
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    showToast('Click the tabs above to switch screens', 'info', 'IntelNyx Dial Preview');
+  }, 600);
+});
+</script>
+</body>
+</html>

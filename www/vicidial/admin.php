@@ -2988,7 +2988,7 @@ if ( ($SSadmin_modify_refresh > 1) and (preg_match("/^3/",$ADD)) )
 	if (preg_match("/^3/",$ADD)) {$modify_url = "$PHP_SELF?$QUERY_STRING";}
 	echo "<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"$SSadmin_modify_refresh;URL=$modify_url\">\n";
 	}
-echo "<title>ADMINISTRATION: ";
+echo "<title>IntelNyx Dial | Admin — ";
 
 if (!isset($ADD))   {$ADD=0;}
 

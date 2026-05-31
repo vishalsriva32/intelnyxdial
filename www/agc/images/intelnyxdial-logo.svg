@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" width="280" height="60">
+  <defs>
+    <linearGradient id="logoGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5c518;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#e8a000;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5c518;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="logoWhite" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d4b8ff;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Icon: stylized phone/signal hexagon -->
+  <g transform="translate(4, 8)">
+    <!-- Hexagon background -->
+    <polygon points="22,0 44,11 44,33 22,44 0,33 0,11" fill="url(#logoGold)" opacity="0.95" filter="url(#glow)"/>
+    <!-- Inner phone icon -->
+    <path d="M15,14 C15,14 17,14 19,16 L21,20 C21,20 19,21 19,22 C19,23 22,27 23,27 C24,27 25,25 25,25 L29,27 C31,29 31,31 31,31 C31,31 29,34 26,33 C23,32 13,23 12,19 C11,15 15,14 15,14 Z" fill="#1a0533" stroke="none"/>
+    <!-- Signal dots -->
+    <circle cx="26" cy="12" r="2" fill="#1a0533" opacity="0.8"/>
+    <circle cx="31" cy="10" r="2" fill="#1a0533" opacity="0.6"/>
+    <circle cx="36" cy="8" r="2" fill="#1a0533" opacity="0.4"/>
+  </g>
+
+  <!-- "intel" text -->
+  <text x="56" y="40"
+    font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+    font-size="28"
+    font-weight="700"
+    letter-spacing="-0.5"
+    fill="url(#logoWhite)"
+    filter="url(#glow)">intel</text>
+
+  <!-- "nyx" text in gold -->
+  <text x="122" y="40"
+    font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+    font-size="28"
+    font-weight="700"
+    letter-spacing="-0.5"
+    fill="url(#logoGold)"
+    filter="url(#glow)">nyx</text>
+
+  <!-- "dial" text — lighter weight -->
+  <text x="169" y="40"
+    font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+    font-size="18"
+    font-weight="300"
+    letter-spacing="1"
+    fill="rgba(255,255,255,0.55)">dial</text>
+
+  <!-- Tagline -->
+  <text x="57" y="54"
+    font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+    font-size="8"
+    font-weight="400"
+    letter-spacing="3"
+    fill="rgba(245,197,24,0.7)"
+    text-transform="uppercase">INTELLIGENT CONTACT PLATFORM</text>
+</svg>
