@@ -1050,8 +1050,29 @@ html, body {
   width: 100% !important;
 }
 
-/* ── Full width ── */
-table[width], td[width], center { width: 100% !important; max-width: 100% !important; }
+/* ── Full width — only outer containers, NOT inner cells ── */
+center, CENTER {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  text-align: left !important;
+}
+/* Main layout table full width */
+body > center > table,
+body > CENTER > table,
+body > center > TABLE {
+  width: 100% !important;
+}
+
+/* ── Fix tiny font tags ── */
+font { font-size: 14px !important; font-family: 'Inter', 'Segoe UI', Helvetica, sans-serif !important; }
+font[size="1"] { font-size: 11px !important; }
+font[size="2"] { font-size: 13px !important; }
+font[size="3"] { font-size: 14px !important; }
+font[size="4"] { font-size: 16px !important; }
+font[size="5"] { font-size: 20px !important; }
+font[size="+1"] { font-size: 15px !important; }
+font[size="-1"] { font-size: 12px !important; }
 
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: #f1f1f1; }
