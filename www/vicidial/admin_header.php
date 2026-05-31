@@ -1151,25 +1151,102 @@ td[bgcolor="#C6D6EC"] a, td[bgcolor="#c6d6ec"] a {
   color: var(--accent) !important;
 }
 
-/* Sub-items indented */
-td[align="LEFT"] a, td[align="left"] a {
+/* Sub-items indented — SCOPED to sidebar only */
+td[bgcolor="#015B91"] td[align="LEFT"] a,
+td[bgcolor="#015b91"] td[align="LEFT"] a,
+td[bgcolor="#015B91"] td[align="left"] a,
+td[bgcolor="#015b91"] td[align="left"] a {
   padding-left: 28px !important;
   font-size: 12px !important;
   color: var(--text-muted) !important;
 }
-td[align="LEFT"] a:hover, td[align="left"] a:hover {
+td[bgcolor="#015B91"] td[align="LEFT"] a:hover,
+td[bgcolor="#015b91"] td[align="LEFT"] a:hover,
+td[bgcolor="#015B91"] td[align="left"] a:hover,
+td[bgcolor="#015b91"] td[align="left"] a:hover {
   color: var(--accent) !important;
   background: var(--accent-soft) !important;
 }
 
 /* ═══════════════════════════════════════════
-   TOP NAV BAR
+   CONTENT COLUMN (right of sidebar)
    ═══════════════════════════════════════════ */
-td[bgcolor="#003399"],
-td[bgcolor="#003366"],
-table[bgcolor="#003399"] {
+td[bgcolor="#D9E6FE"],
+td[bgcolor="#d9e6fe"] {
+  background: var(--bg-page) !important;
+  padding: 0 !important;
+  vertical-align: top !important;
+}
+table[bgcolor="#D9E6FE"],
+table[bgcolor="#d9e6fe"] {
+  width: 100% !important;
+  background: transparent !important;
+  border-collapse: collapse !important;
+}
+
+/* ── Top nav bar: override the broad sidebar rules for the nested #015B91 cells ── */
+td[bgcolor="#D9E6FE"] td[bgcolor="#015B91"],
+td[bgcolor="#d9e6fe"] td[bgcolor="#015B91"],
+td[bgcolor="#D9E6FE"] td[bgcolor="#015b91"],
+td[bgcolor="#d9e6fe"] td[bgcolor="#015b91"] {
+  background: #ffffff !important;
+  border-right: none !important;
+  border-bottom: 1px solid var(--border-light) !important;
+  min-width: 0 !important;
+  width: auto !important;
+  padding: 10px 16px !important;
+  vertical-align: middle !important;
+}
+/* Top nav links: override display:block back to inline */
+td[bgcolor="#D9E6FE"] td[bgcolor="#015B91"] a,
+td[bgcolor="#d9e6fe"] td[bgcolor="#015B91"] a,
+td[bgcolor="#D9E6FE"] td[bgcolor="#015b91"] a,
+td[bgcolor="#d9e6fe"] td[bgcolor="#015b91"] a {
+  display: inline-block !important;
+  padding: 5px 10px !important;
+  margin: 0 1px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: var(--text-secondary) !important;
+  border-radius: 4px !important;
+  background: none !important;
+  white-space: nowrap !important;
+}
+td[bgcolor="#D9E6FE"] td[bgcolor="#015B91"] a:hover,
+td[bgcolor="#d9e6fe"] td[bgcolor="#015b91"] a:hover {
+  background: var(--accent-soft) !important;
+  color: var(--accent) !important;
+}
+/* Date/time cell (right side of top nav) */
+td[bgcolor="#D9E6FE"] td[align="RIGHT"],
+td[bgcolor="#d9e6fe"] td[align="RIGHT"] {
   background: #ffffff !important;
   border-bottom: 1px solid var(--border-light) !important;
+  color: var(--text-muted) !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  padding: 10px 16px !important;
+  white-space: nowrap !important;
+  vertical-align: middle !important;
+  text-align: right !important;
+}
+/* Sub-nav context breadcrumb rows below top nav */
+td[bgcolor="#D9E6FE"] tr[bgcolor]:not([bgcolor="#015B91"]):not([bgcolor="#015b91"]) td,
+td[bgcolor="#d9e6fe"] tr[bgcolor]:not([bgcolor="#015B91"]):not([bgcolor="#015b91"]) td {
+  background: #f0f4ff !important;
+  border-bottom: 1px solid var(--border-light) !important;
+  padding: 6px 16px !important;
+  font-size: 12px !important;
+}
+td[bgcolor="#D9E6FE"] tr[bgcolor] a,
+td[bgcolor="#d9e6fe"] tr[bgcolor] a {
+  display: inline !important;
+  padding: 0 !important;
+  margin: 0 4px !important;
+  border-radius: 0 !important;
+  background: none !important;
+  font-size: 12px !important;
+  color: var(--text-secondary) !important;
 }
 
 /* ═══════════════════════════════════════════
