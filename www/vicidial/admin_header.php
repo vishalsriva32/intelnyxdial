@@ -1024,10 +1024,9 @@ echo "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=I
   --accent-hover:   #4c1d95;
   --accent-soft:    #ede9fe;
   --bg-page:        #f5f6fa;
-  --bg-card:        #ffffff;
   --bg-sidebar:     #ffffff;
   --text-primary:   #111827;
-  --text-secondary: #6b7280;
+  --text-secondary: #374151;
   --text-muted:     #9ca3af;
   --border-light:   #e5e7eb;
   --border-mid:     #d1d5db;
@@ -1035,44 +1034,236 @@ echo "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=I
   --danger:         #dc2626;
   --warning:        #d97706;
   --info:           #2563eb;
-  --shadow-sm:      0 1px 3px rgba(0,0,0,.08);
-  --shadow-md:      0 4px 12px rgba(0,0,0,.10);
 }
 *, *::before, *::after { box-sizing: border-box; }
 
 html, body {
-  margin: 0; padding: 0;
+  margin: 0 !important; padding: 0 !important;
   font-family: 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif !important;
-  font-size: 14px;
+  font-size: 14px !important;
   color: var(--text-primary) !important;
   background: var(--bg-page) !important;
   -webkit-font-smoothing: antialiased;
-  width: 100% !important;
 }
 
-/* ── Full width — only outer containers, NOT inner cells ── */
-center, CENTER {
-  display: block !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  text-align: left !important;
-}
-/* Main layout table full width */
-body > center > table,
-body > CENTER > table,
-body > center > TABLE {
-  width: 100% !important;
-}
+/* ── Make the page fill full width ── */
+center, CENTER { display: block !important; width: 100% !important; text-align: left !important; }
+body > center > table, body > center > TABLE { width: 100% !important; min-height: 100vh; }
 
-/* ── Fix tiny font tags ── */
-font { font-size: 14px !important; font-family: 'Inter', 'Segoe UI', Helvetica, sans-serif !important; }
-font[size="1"] { font-size: 11px !important; }
-font[size="2"] { font-size: 13px !important; }
-font[size="3"] { font-size: 14px !important; }
-font[size="4"] { font-size: 16px !important; }
-font[size="5"] { font-size: 20px !important; }
+/* ── Fix old font tags — make them readable ── */
+font {
+  font-family: 'Inter', 'Segoe UI', Helvetica, sans-serif !important;
+  font-size: 13px !important;
+}
+font[size="1"]  { font-size: 11px !important; }
+font[size="2"]  { font-size: 13px !important; }
+font[size="3"]  { font-size: 14px !important; }
+font[size="4"]  { font-size: 16px !important; }
+font[size="5"]  { font-size: 20px !important; }
 font[size="+1"] { font-size: 15px !important; }
 font[size="-1"] { font-size: 12px !important; }
+
+/* Override inline color attributes */
+font[face]              { font-family: 'Inter', 'Segoe UI', Helvetica, sans-serif !important; }
+font[color="white"],
+font[color="WHITE"]     { color: var(--text-primary) !important; }
+font[color="BLACK"],
+font[color="black"]     { color: var(--text-secondary) !important; }
+font[color="red"],
+font[color="RED"]       { color: var(--danger) !important; }
+font[color="green"],
+font[color="GREEN"]     { color: var(--success) !important; }
+font[color="blue"],
+font[color="BLUE"]      { color: var(--info) !important; }
+font[color="orange"],
+font[color="ORANGE"]    { color: var(--warning) !important; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
+
+/* ── Links ── */
+a { color: var(--accent) !important; text-decoration: none; }
+a:hover { color: var(--accent-hover) !important; text-decoration: underline; }
+
+/* ═══════════════════════════════════════════
+   SIDEBAR
+   ═══════════════════════════════════════════ */
+td[bgcolor="#015B91"],
+td[bgcolor="#015b91"] {
+  background: var(--bg-sidebar) !important;
+  border-right: 1px solid var(--border-light) !important;
+  vertical-align: top !important;
+  min-width: 200px !important;
+  width: 200px !important;
+  padding: 0 !important;
+}
+table[bgcolor="#015B91"],
+table[bgcolor="#015b91"] {
+  background: transparent !important;
+  width: 100% !important;
+}
+
+/* Sidebar section header rows */
+td[bgcolor="#015B91"] > table td,
+td[bgcolor="#015b91"] > table td {
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+/* All nav links in sidebar */
+td[bgcolor="#015B91"] a,
+td[bgcolor="#015b91"] a {
+  display: block !important;
+  padding: 8px 16px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--text-secondary) !important;
+  border-radius: 6px !important;
+  margin: 1px 6px !important;
+  transition: background 0.15s, color 0.15s !important;
+  white-space: nowrap !important;
+}
+td[bgcolor="#015B91"] a:hover,
+td[bgcolor="#015b91"] a:hover {
+  background: var(--accent-soft) !important;
+  color: var(--accent) !important;
+  text-decoration: none !important;
+}
+
+/* Section header links (top-level nav items like Users, Campaigns) */
+td[bgcolor="#015B91"] > table > tbody > tr > td > a,
+td[bgcolor="#015b91"] > table > tbody > tr > td > a {
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  color: var(--text-primary) !important;
+  padding: 9px 16px !important;
+  margin-top: 2px !important;
+}
+
+/* Active/selected section highlighting */
+td[bgcolor="#B6D3FC"] a, td[bgcolor="#b6d3fc"] a,
+td[bgcolor="#C6D6EC"] a, td[bgcolor="#c6d6ec"] a {
+  background: var(--accent-soft) !important;
+  color: var(--accent) !important;
+}
+
+/* Sub-items indented */
+td[align="LEFT"] a, td[align="left"] a {
+  padding-left: 28px !important;
+  font-size: 12px !important;
+  color: var(--text-muted) !important;
+}
+td[align="LEFT"] a:hover, td[align="left"] a:hover {
+  color: var(--accent) !important;
+  background: var(--accent-soft) !important;
+}
+
+/* ═══════════════════════════════════════════
+   TOP NAV BAR
+   ═══════════════════════════════════════════ */
+td[bgcolor="#003399"],
+td[bgcolor="#003366"],
+table[bgcolor="#003399"] {
+  background: #ffffff !important;
+  border-bottom: 1px solid var(--border-light) !important;
+}
+
+/* ═══════════════════════════════════════════
+   CONTENT AREA — cell backgrounds
+   ═══════════════════════════════════════════ */
+td[bgcolor="white"], td[bgcolor="WHITE"],
+td[bgcolor="#ffffff"], td[bgcolor="#FFFFFF"] { background: #ffffff !important; }
+
+td[bgcolor="#B6D3FC"], td[bgcolor="#b6d3fc"] { background: #eff6ff !important; }
+td[bgcolor="#CCCCCC"], td[bgcolor="#cccccc"],
+td[bgcolor="#AAAAAA"], td[bgcolor="#aaaaaa"],
+td[bgcolor="#C0C0C0"] { background: #f3f4f6 !important; }
+td[bgcolor="#C6D6EC"], td[bgcolor="#c6d6ec"] { background: #f0f4ff !important; }
+td[bgcolor="#EAEAEA"], td[bgcolor="#eaeaea"],
+td[bgcolor="#DDDDDD"], td[bgcolor="#dddddd"],
+td[bgcolor="#EFEFEF"], td[bgcolor="#efefef"],
+td[bgcolor="#F5F5F5"], td[bgcolor="#f5f5f5"] { background: #f9fafb !important; }
+td[bgcolor="#FF9999"], td[bgcolor="#ff9999"] { background: #fef2f2 !important; }
+td[bgcolor="#99FF99"], td[bgcolor="#99ff99"] { background: #f0fdf4 !important; }
+td[bgcolor="#FFFF99"], td[bgcolor="#ffff99"] { background: #fefce8 !important; }
+table[bgcolor="white"], table[bgcolor="#ffffff"],
+table[bgcolor="#FFFFFF"] { background: #ffffff !important; }
+
+/* ═══════════════════════════════════════════
+   TABLES
+   ═══════════════════════════════════════════ */
+th, td {
+  font-family: 'Inter', 'Segoe UI', Helvetica, sans-serif !important;
+  font-size: 13px !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-light) !important;
+  line-height: 1.5 !important;
+}
+th {
+  background: #f9fafb !important;
+  color: var(--text-muted) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  padding: 10px 12px !important;
+  border-bottom: 1px solid var(--border-light) !important;
+}
+td { padding: 8px 12px !important; }
+tr:nth-child(even) td { background: #fafafa !important; }
+tr:hover td { background: #f5f5ff !important; }
+
+/* ═══════════════════════════════════════════
+   INPUTS & FORMS
+   ═══════════════════════════════════════════ */
+input[type="text"], input[type="password"], textarea, select {
+  background: #ffffff !important;
+  border: 1.5px solid var(--border-mid) !important;
+  border-radius: 6px !important;
+  color: var(--text-primary) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  padding: 7px 10px !important;
+  min-width: 180px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+input[type="text"]:focus, input[type="password"]:focus,
+textarea:focus, select:focus {
+  border-color: var(--accent) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(91,33,182,.10) !important;
+}
+
+/* ── Buttons ── */
+input[type="submit"], input[type="button"] {
+  background: var(--accent) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 6px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  padding: 8px 20px !important;
+  cursor: pointer !important;
+  transition: background 0.15s !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,.1) !important;
+  min-width: 80px;
+}
+input[type="submit"]:hover, input[type="button"]:hover {
+  background: var(--accent-hover) !important;
+}
+
+/* ── Hide old logo img ── */
+img[src="./vicidial_admin_web_logo.gif"],
+img[src="vicidial_admin_web_logo.gif"],
+img[src="./vicidial_admin_web_logo_small.gif"],
+img[src="vicidial_admin_web_logo_small.gif"] {
+  display: none !important;
+}
+</style>
 
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: #f1f1f1; }
@@ -1228,8 +1419,12 @@ $SScustom_fields_enabled =	$row[3];
 <TABLE BGCOLOR=white cellpadding=0 cellspacing=0>
 <!-- BEGIN SIDEBAR NAVIGATION -->
 <TR><TD VALIGN=TOP WIDTH=170 BGCOLOR=#015B91 ALIGN=CENTER>
-<IMG SRC="./vicidial_admin_web_logo.gif" WIDTH=170 HEIGHT=45 ALT="IntelNyx Dial">
-<span style="display:block;color:#6b7280;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;text-align:center;padding:4px 0 12px;">ADMINISTRATION</span>
+<div style="padding:20px 10px 12px;text-align:center;border-bottom:1px solid #e5e7eb;">
+  <div style="font-family:'Inter',sans-serif;font-size:20px;font-weight:800;letter-spacing:-0.5px;line-height:1;">
+    <span style="color:#111827;">intel</span><span style="color:#5b21b6;">nyx</span>
+  </div>
+  <div style="font-size:9px;font-weight:600;letter-spacing:0.14em;color:#9ca3af;text-transform:uppercase;margin-top:4px;">Admin Console</div>
+</div>
 	<TABLE CELLPADDING=2 CELLSPACING=0 BGCOLOR=#015B91 WIDTH=160>
 	<?php if ($reports_only_user < 1) {
 		?>
