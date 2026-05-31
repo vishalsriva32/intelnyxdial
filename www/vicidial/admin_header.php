@@ -1018,22 +1018,25 @@ echo "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\" />\n";
 echo "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap\" />\n";
 ?>
 <style type="text/css">
-/* ── IntelNyx Dial Admin Theme ── */
+/* ── IntelNyx Dial Admin — Clean SaaS Theme ── */
 :root {
-  --brand-purple-deep:  #0e0320;
-  --brand-purple-dark:  #1a0533;
-  --brand-purple-mid:   #2d1b69;
-  --brand-purple-light: #4c2f9e;
-  --brand-gold:         #f5c518;
-  --brand-gold-light:   #ffe066;
-  --glass-bg:           rgba(255,255,255,0.07);
-  --glass-border:       rgba(255,255,255,0.15);
-  --glass-border-gold:  rgba(245,197,24,0.4);
-  --text-primary:       #f0eaff;
-  --text-secondary:     rgba(240,234,255,0.65);
-  --text-muted:         rgba(240,234,255,0.35);
-  --status-green:       #22d47a;
-  --status-red:         #ff5c5c;
+  --accent:         #5b21b6;
+  --accent-hover:   #4c1d95;
+  --accent-soft:    #ede9fe;
+  --bg-page:        #f5f6fa;
+  --bg-card:        #ffffff;
+  --bg-sidebar:     #ffffff;
+  --text-primary:   #111827;
+  --text-secondary: #6b7280;
+  --text-muted:     #9ca3af;
+  --border-light:   #e5e7eb;
+  --border-mid:     #d1d5db;
+  --success:        #059669;
+  --danger:         #dc2626;
+  --warning:        #d97706;
+  --info:           #2563eb;
+  --shadow-sm:      0 1px 3px rgba(0,0,0,.08);
+  --shadow-md:      0 4px 12px rgba(0,0,0,.10);
 }
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -1042,122 +1045,140 @@ html, body {
   font-family: 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif !important;
   font-size: 14px;
   color: var(--text-primary) !important;
-  background-color: var(--brand-purple-deep) !important;
-  background-image:
-    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(76,47,158,0.5) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(45,27,105,0.6) 0%, transparent 55%),
-    linear-gradient(135deg, #0e0320 0%, #1a0533 50%, #0e0320 100%) !important;
-  background-attachment: fixed !important;
+  background: var(--bg-page) !important;
   -webkit-font-smoothing: antialiased;
+  width: 100% !important;
 }
+
+/* ── Full width ── */
+table[width], td[width], center { width: 100% !important; max-width: 100% !important; }
 
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: rgba(255,255,255,0.04); border-radius: 4px; }
-::-webkit-scrollbar-thumb { background: rgba(245,197,24,0.35); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(245,197,24,0.6); }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
 
-a { color: var(--brand-gold) !important; text-decoration: none; }
-a:hover { color: var(--brand-gold-light) !important; text-decoration: underline; }
+a { color: var(--accent) !important; text-decoration: none; }
+a:hover { color: var(--accent-hover) !important; text-decoration: underline; }
 
-/* ── Kill old inline colour attributes ── */
-font[color="white"], font[color="WHITE"],
-font[color="White"] { color: var(--text-primary) !important; }
-font[color="BLACK"], font[color="black"] { color: var(--text-primary) !important; }
 font[face] { font-family: 'Inter', 'Segoe UI', Helvetica, sans-serif !important; }
+font[color="white"], font[color="WHITE"] { color: var(--text-primary) !important; }
+font[color="BLACK"], font[color="black"] { color: var(--text-primary) !important; }
+font[color="red"],   font[color="RED"]   { color: var(--danger) !important; }
+font[color="green"], font[color="GREEN"] { color: var(--success) !important; }
+font[color="blue"],  font[color="BLUE"]  { color: var(--info) !important; }
 
-/* ── Sidebar nav (was bgcolor=#015B91) ── */
+/* ── Sidebar ── */
 table[bgcolor="#015B91"], table[bgcolor="#015b91"],
 td[bgcolor="#015B91"],    td[bgcolor="#015b91"] {
-  background: linear-gradient(180deg, var(--brand-purple-mid) 0%, var(--brand-purple-dark) 100%) !important;
-  border-right: 1px solid rgba(245,197,24,0.18) !important;
+  background: var(--bg-sidebar) !important;
+  border-right: 1px solid var(--border-light) !important;
+}
+td[bgcolor="#015B91"] a, td[bgcolor="#015b91"] a {
+  color: var(--text-secondary) !important;
+  font-size: 13px !important;
+  display: block;
+  padding: 5px 12px;
+  border-radius: 5px;
+  transition: background .15s, color .15s;
+}
+td[bgcolor="#015B91"] a:hover, td[bgcolor="#015b91"] a:hover {
+  background: var(--accent-soft) !important;
+  color: var(--accent) !important;
+  text-decoration: none !important;
 }
 
-/* ── Table & cell backgrounds ── */
+/* ── Top bar ── */
+td[bgcolor="#003399"], td[bgcolor="#003366"],
+table[bgcolor="#003399"] {
+  background: #ffffff !important;
+  border-bottom: 1px solid var(--border-light) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+/* ── Cell backgrounds ── */
 td[bgcolor="white"], td[bgcolor="WHITE"],
-td[bgcolor="#ffffff"], td[bgcolor="#FFFFFF"] {
-  background: rgba(255,255,255,0.03) !important;
-}
-td[bgcolor="#B6D3FC"], td[bgcolor="#b6d3fc"] { background: rgba(76,47,158,0.25) !important; }
-td[bgcolor="#CCCCCC"], td[bgcolor="#cccccc"] { background: rgba(255,255,255,0.08) !important; }
-td[bgcolor="#C6D6EC"], td[bgcolor="#c6d6ec"] { background: rgba(76,47,158,0.2) !important; }
+td[bgcolor="#ffffff"], td[bgcolor="#FFFFFF"] { background: #ffffff !important; }
+td[bgcolor="#B6D3FC"], td[bgcolor="#b6d3fc"] { background: #eff6ff !important; }
+td[bgcolor="#CCCCCC"], td[bgcolor="#cccccc"],
+td[bgcolor="#AAAAAA"], td[bgcolor="#aaaaaa"],
+td[bgcolor="#C0C0C0"] { background: #f9fafb !important; }
+td[bgcolor="#C6D6EC"], td[bgcolor="#c6d6ec"] { background: #f0f4ff !important; }
 td[bgcolor="#EAEAEA"], td[bgcolor="#eaeaea"],
-td[bgcolor="#DDDDDD"], td[bgcolor="#dddddd"] { background: rgba(255,255,255,0.05) !important; }
-td[bgcolor="#F5F5FF"], td[bgcolor="#f5f5ff"] { background: rgba(255,255,255,0.04) !important; }
-td[bgcolor="#FF9999"], td[bgcolor="#ff9999"] { background: rgba(255,92,92,0.2) !important; }
-td[bgcolor="#99FF99"], td[bgcolor="#99ff99"] { background: rgba(34,212,122,0.15) !important; }
-td[bgcolor="#FFFF99"], td[bgcolor="#ffff99"] { background: rgba(245,197,24,0.12) !important; }
-table[bgcolor="white"], table[bgcolor="WHITE"],
-table[bgcolor="#ffffff"], table[bgcolor="#FFFFFF"] { background: transparent !important; }
-tr:nth-child(even) td { background: rgba(255,255,255,0.02) !important; }
+td[bgcolor="#DDDDDD"], td[bgcolor="#dddddd"],
+td[bgcolor="#EFEFEF"], td[bgcolor="#F5F5F5"] { background: #f9fafb !important; }
+td[bgcolor="#FF9999"], td[bgcolor="#ff9999"] { background: #fef2f2 !important; }
+td[bgcolor="#99FF99"], td[bgcolor="#99ff99"] { background: #f0fdf4 !important; }
+td[bgcolor="#FFFF99"], td[bgcolor="#ffff99"] { background: #fefce8 !important; }
+table[bgcolor="white"], table[bgcolor="#ffffff"],
+table[bgcolor="#FFFFFF"] { background: #ffffff !important; }
+tr:nth-child(even) td { background: #fafafa !important; }
 
-/* ── Type ── */
+/* ── Tables ── */
 th, td {
   color: var(--text-primary) !important;
   font-family: 'Inter', 'Segoe UI', Helvetica, sans-serif !important;
   font-size: 13px !important;
-  border-color: rgba(255,255,255,0.07) !important;
+  border-color: var(--border-light) !important;
 }
 th {
-  background: rgba(76,47,158,0.3) !important;
-  color: var(--brand-gold) !important;
+  background: #f9fafb !important;
+  color: var(--text-secondary) !important;
   font-weight: 600 !important;
+  font-size: 11px !important;
+  text-transform: uppercase;
+  letter-spacing: .04em;
 }
 
 /* ── Inputs ── */
 input[type="text"], input[type="password"], textarea, select {
-  background: rgba(255,255,255,0.08) !important;
-  border: 1px solid rgba(255,255,255,0.18) !important;
+  background: #ffffff !important;
+  border: 1.5px solid var(--border-mid) !important;
   border-radius: 6px !important;
   color: var(--text-primary) !important;
   font-family: 'Inter', sans-serif !important;
   font-size: 13px !important;
-  padding: 6px 10px !important;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  padding: 7px 10px !important;
+  transition: border-color .18s, box-shadow .18s;
 }
 input[type="text"]:focus, input[type="password"]:focus,
 textarea:focus, select:focus {
-  border-color: var(--glass-border-gold) !important;
+  border-color: var(--accent) !important;
   outline: none !important;
-  box-shadow: 0 0 0 3px rgba(245,197,24,0.12) !important;
+  box-shadow: 0 0 0 3px rgba(91,33,182,.10) !important;
 }
-select option { background: var(--brand-purple-dark); color: var(--text-primary); }
 
 /* ── Buttons ── */
 input[type="submit"], input[type="button"], button {
-  background: linear-gradient(135deg, #f5c518 0%, #c89b0a 100%) !important;
-  color: #1a0533 !important;
-  border: 1px solid rgba(245,197,24,0.5) !important;
+  background: var(--accent) !important;
+  color: #ffffff !important;
+  border: none !important;
   border-radius: 6px !important;
   font-family: 'Inter', sans-serif !important;
-  font-weight: 700 !important;
+  font-weight: 600 !important;
   font-size: 13px !important;
   padding: 8px 18px !important;
   cursor: pointer !important;
-  box-shadow: 0 4px 14px rgba(245,197,24,0.25), 0 2px 6px rgba(0,0,0,0.3) !important;
-  transition: all 0.2s !important;
-  text-shadow: none !important;
+  transition: background .18s !important;
+  box-shadow: var(--shadow-sm) !important;
 }
 input[type="submit"]:hover, input[type="button"]:hover, button:hover {
-  background: linear-gradient(135deg, #ffe066 0%, #f5c518 100%) !important;
-  transform: translateY(-1px) !important;
+  background: var(--accent-hover) !important;
 }
 
-/* ── Logo override (CSS content swap) ── */
+/* ── Logo ── */
 img[src="./vicidial_admin_web_logo.gif"],
 img[src="vicidial_admin_web_logo.gif"],
 img[src="./vicidial_admin_web_logo_small.gif"],
 img[src="vicidial_admin_web_logo_small.gif"] {
   content: url('../agc/images/intelnyxdial-logo.svg') !important;
-  width: 150px !important;
+  width: 140px !important;
   height: auto !important;
-  max-height: 44px !important;
+  max-height: 40px !important;
   display: block !important;
-  margin: 12px auto 4px !important;
-  filter: drop-shadow(0 0 8px rgba(245,197,24,0.35)) !important;
+  margin: 14px auto 6px !important;
+  filter: none !important;
 }
-
-/* ── Admin brand label ── */
-b > font[color="white"]:first-child { display: none !important; }
 </style>
 <?php
 echo "</head>\n";
@@ -1187,7 +1208,7 @@ $SScustom_fields_enabled =	$row[3];
 <!-- BEGIN SIDEBAR NAVIGATION -->
 <TR><TD VALIGN=TOP WIDTH=170 BGCOLOR=#015B91 ALIGN=CENTER>
 <IMG SRC="./vicidial_admin_web_logo.gif" WIDTH=170 HEIGHT=45 ALT="IntelNyx Dial">
-<span style="display:block;color:#f5c518;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;text-align:center;padding:0 0 10px;text-shadow:0 0 10px rgba(245,197,24,0.4);">ADMINISTRATION</span>
+<span style="display:block;color:#6b7280;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;text-align:center;padding:4px 0 12px;">ADMINISTRATION</span>
 	<TABLE CELLPADDING=2 CELLSPACING=0 BGCOLOR=#015B91 WIDTH=160>
 	<?php if ($reports_only_user < 1) {
 		?>
